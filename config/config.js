@@ -5,10 +5,12 @@ const config = {
     port: process.env.PORT || 5000
   },
   development: {
-    session: 'secret-boilerplate-token'
+    session: 'secret-boilerplate-token',
+    database: 'mongodb://localhost:27017/koa2-boilerplate'
   },
   production: {
-    session: 'secret-boilerplate-token'
+    session: 'secret-boilerplate-token',
+    database: 'mongodb://localhost:27017/koa2-boilerplate'
   }
 }
 
