@@ -1,0 +1,19 @@
+{
+  "name": "koa2-boilerplate",
+  "version": "1.0.0",
+  "description": "Koa2 boilerplate covering all essensials",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "koa",
+    "koa2",
+    "boilerplate",
+    "es6",
+    "mongoose",
+    "passportjs"
+  ],
+  "author": "Adrian Obelmejias <adrian@obel.me>",
+  "license": "MIT"
+}
