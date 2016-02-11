@@ -4,6 +4,7 @@
   "description": "Koa2 boilerplate covering all essensials",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-register --require babel-polyfill"
   },
   "keywords": [
