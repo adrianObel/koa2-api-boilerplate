@@ -4,8 +4,12 @@ const config = {
   common: {
     port: process.env.PORT || 5000
   },
-  development: {},
-  production: {}
+  development: {
+    session: 'secret-boilerplate-token'
+  },
+  production: {
+    session: 'secret-boilerplate-token'
+  }
 }
 
 export default Object.assign({}, config.common, config[env])
