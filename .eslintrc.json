@@ -7,7 +7,8 @@
   "rules": {
     "semi": [2, "never"],
     "no-param-reassign": [2, { "props": false }],
-    "strict": 0
+    "strict": 0,
+    "comma-dangle": [2, "never"]
   },
   "env": {
     "node": true,
