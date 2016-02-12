@@ -10,7 +10,7 @@ router.get('/',
     try {
       const users = User.find({}, '-password -salt')
       ctx.body = users
-    } catch(err) {
+    } catch (err) {
       this.throw(err, 500)
     }
   }
@@ -20,11 +20,11 @@ router.get('/:id',
   async (ctx) => {
     try {
       const user = await User.findById(ctx.params.id, '-password -salt')
-      if(!user) {
+      if (!user) {
         this.throw(404)
       }
       ctx.body = user
-    } catch(err) {
+    } catch (err) {
       this.throw(err, 500)
     }
   }
@@ -46,7 +46,7 @@ router.post('/',
         user: response,
         token
       }
-    } catch(err) {
+    } catch (err) {
       ctx.throw(422, err)
     }
   }
@@ -57,7 +57,7 @@ router.put('/:id',
     try {
       const user = await User.findById(ctx.params.id)
 
-      if(!user) {
+      if (!user) {
         throw new Error({ status: 404 })
       }
 
@@ -77,7 +77,7 @@ router.delete('/:id',
     try {
       const user = await User.findById(ctx.params.id)
 
-      if(!user) {
+      if (!user) {
         throw new Error({ status: 404 })
       }
 
