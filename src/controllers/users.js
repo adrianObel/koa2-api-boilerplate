@@ -1,5 +1,6 @@
 import Router from 'koa-router'
 import User from '../models/users'
+import config from '../../config/config'
 import jwt from 'jsonwebtoken'
 
 const router = new Router({ prefix: '/users' })
@@ -7,7 +8,7 @@ const router = new Router({ prefix: '/users' })
 router.get('/',
   async (ctx) => {
     try {
-      const users = User.find({}, '-password')
+      const users = User.find({}, '-password -salt')
       ctx.body = users
     } catch(err) {
       this.throw(err, 500)
@@ -18,7 +19,7 @@ router.get('/',
 router.get('/:id',
   async (ctx) => {
     try {
-      const user = await User.findById(ctx.params.id, '-password')
+      const user = await User.findById(ctx.params.id, '-password -salt')
       if(!user) {
         this.throw(404)
       }
@@ -36,10 +37,13 @@ router.post('/',
       await user.save()
       const token = jwt.sign({ id: user.id }, config.token)
 
-      delete user.password
+      const response = user.toJSON()
+
+      delete response.password
+      delete response.salt
 
       ctx.body = {
-        user,
+        user: response,
         token
       }
     } catch(err) {
