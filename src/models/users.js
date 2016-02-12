@@ -19,7 +19,7 @@ User.pre('save', function preSave(next) {
   new Promise((resolve, reject) => {
     bcrypt.genSalt(10, (err, salt) => {
       if (err) { return reject(err) }
-      return salt
+      resolve(salt)
     })
   })
   .then(salt => {
@@ -28,12 +28,11 @@ User.pre('save', function preSave(next) {
 
       user.password = hash
       user.salt = salt
-      return user
+
+      next(null)
     })
   })
-  .then(() => {
-    next()
-  })
+  .catch(err => next(err))
 })
 
 User.methods.validatePassword = function validatePassword(password) {
