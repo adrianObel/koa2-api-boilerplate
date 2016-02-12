@@ -11,7 +11,7 @@ router.post('/', async (ctx, next) =>
       ctx.throw(401)
     }
 
-    const token = jwt.sign({ id: user.id }, config.tokenSecret)
+    const token = jwt.sign({ id: user.id }, config.token)
 
     const response = user.toJSON()
 
