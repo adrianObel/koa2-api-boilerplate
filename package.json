@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "./node_modules/.bin/nodemon index.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-register --require babel-polyfill",
     "lint": "eslint src/**/*.js"
   },
@@ -42,6 +43,7 @@
     "eslint-config-airbnb": "^5.0.0",
     "eslint-plugin-react": "^3.16.1",
     "mocha": "^2.4.5",
+    "nodemon": "^1.8.1",
     "should": "^8.2.2",
     "supertest": "^1.2.0"
   }
