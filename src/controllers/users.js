@@ -9,7 +9,7 @@ const router = new Router({ prefix: '/users' })
 router.get('/',
   ensureUser,
   async (ctx) => {
-    const users = User.find({}, '-password -salt')
+    const users = await User.find({}, '-password -salt')
     ctx.body = users
   }
 )
