@@ -17,12 +17,21 @@ router.get('/',
 router.get('/:id',
   ensureUser,
   async (ctx) => {
-    const user = await User.findById(ctx.params.id, '-password -salt')
-    if (!user) {
-      ctx.throw(404)
-    }
+    try {
+      const user = await User.findById(ctx.params.id, '-password -salt')
+      if (!user) {
+        ctx.throw(404)
+      }
 
-    ctx.body = user
+      ctx.body = user
+    } catch (err) {
+
+      if (err === 404 || err.name === 'CastError') {
+        ctx.throw(404)
+      }
+
+      ctx.throw(500)
+    }
   }
 )
 
