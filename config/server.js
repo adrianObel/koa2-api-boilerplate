@@ -7,7 +7,7 @@ import session from 'koa-generic-session'
 import passport from 'koa-passport'
 
 import config from './config'
-import { errorMiddleware } from '../src/utils'
+import { errorMiddleware } from '../src/middleware'
 
 const app = new Koa()
 app.keys = [config.session]

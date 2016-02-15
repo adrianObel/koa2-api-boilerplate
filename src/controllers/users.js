@@ -2,10 +2,12 @@ import Router from 'koa-router'
 import User from '../models/users'
 import config from '../../config/config'
 import jwt from 'jsonwebtoken'
+import { ensureUser } from '../middleware/validators'
 
 const router = new Router({ prefix: '/users' })
 
 router.get('/',
+  ensureUser,
   async (ctx) => {
     const users = User.find({}, '-password -salt')
     ctx.body = users
@@ -13,6 +15,7 @@ router.get('/',
 )
 
 router.get('/:id',
+  ensureUser,
   async (ctx) => {
     const user = await User.findById(ctx.params.id, '-password -salt')
     if (!user) {
@@ -46,6 +49,7 @@ router.post('/',
 )
 
 router.put('/:id',
+  ensureUser,
   async (ctx) => {
     const user = await User.findById(ctx.params.id)
 
@@ -62,6 +66,7 @@ router.put('/:id',
 )
 
 router.delete('/:id',
+  ensureUser,
   async (ctx) => {
     const user = await User.findById(ctx.params.id)
 
