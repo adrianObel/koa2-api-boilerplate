@@ -11,7 +11,7 @@ export async function ensureUser(ctx, next) {
 
   let decoded = null
   try {
-    decoded = verify(token, config.tokenSecret)
+    decoded = verify(token, config.token)
   } catch (err) {
     ctx.throw(401)
   }
