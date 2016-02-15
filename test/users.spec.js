@@ -1,12 +1,18 @@
 import app from '../config/server'
 import supertest from 'supertest'
 import { expect, should } from 'chai'
+import { cleanDb } from './utils'
 
 should()
 const request = supertest.agent(app.listen())
 const context = {}
 
 describe('Users', () => {
+  before((done) => {
+    cleanDb()
+    done()
+  })
+
   describe('POST /users', () => {
     it('should reject signup when data is incomplete', (done) => {
       request
@@ -34,6 +40,22 @@ describe('Users', () => {
 
           done()
         })
+    })
+  })
+
+  describe('GET /users', () => {
+    it('should not fetch users if token is invalid', (done) => {
+      request
+        .get('/users?token=1')
+        .set('Accept', 'application/json')
+        .expect(401, done)
+    })
+
+    it('should fetch all users', (done) => {
+      request
+        .get(`/users?token=${context.token}`)
+        .set('Accept', 'application/json')
+        .expect(200, done)
     })
   })
 })
