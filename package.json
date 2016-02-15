@@ -25,6 +25,7 @@
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "bcrypt": "^0.8.5",
+    "glob": "^7.0.0",
     "jsonwebtoken": "^5.5.4",
     "koa": "^2.0.0-alpha.3",
     "koa-bodyparser": "^2.0.1",

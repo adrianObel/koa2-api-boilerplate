@@ -1,11 +1,14 @@
-import users from './users'
-import auth from './auth'
+import { Glob } from 'glob'
 
 exports = module.exports = function Controllers(app) {
-  app
-    .use(auth.routes())
-    .use(auth.allowedMethods())
+  new Glob(`${__dirname}/*.js`, { ignore: '**/index.js' }, (err, matches) => {
+    if (err) { throw err }
 
-    .use(users.routes())
-    .use(users.allowedMethods())
+    matches.forEach((file) => {
+      const controller = require(file).default
+      app
+        .use(controller.routes())
+        .use(controller.allowedMethods())
+    })
+  })
 }
