@@ -60,17 +60,27 @@ router.post('/',
 router.put('/:id',
   ensureUser,
   async (ctx) => {
-    const user = await User.findById(ctx.params.id)
+    try {
+      const user = await User.findById(ctx.params.id, '-password -salt')
+      if (!user) {
+        ctx.throw(404)
+      }
 
-    if (!user) {
-      ctx.throw(404)
+      Object.assign(user, ctx.request.body.user)
+
+      await user.save()
+      ctx.body = {
+        user
+      }
+
+    } catch (err) {
+
+      if (err === 404 || err.name === 'CastError') {
+        ctx.throw(404)
+      }
+
+      ctx.throw(500)
     }
-
-    Object.assign(user, ctx.request.body.user)
-
-    await user.save()
-
-    ctx.body = 200
   }
 )
 
