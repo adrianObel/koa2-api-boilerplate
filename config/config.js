@@ -4,6 +4,11 @@ const config = {
   common: {
     port: process.env.PORT || 5000
   },
+  test: {
+    session: 'secret-boilerplate-token',
+    token: 'secret-jwt-token',
+    database: 'mongodb://localhost:27017/test'
+  },
   development: {
     session: 'secret-boilerplate-token',
     token: 'secret-jwt-token',
