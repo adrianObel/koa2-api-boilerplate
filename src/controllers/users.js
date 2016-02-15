@@ -7,26 +7,19 @@ const router = new Router({ prefix: '/users' })
 
 router.get('/',
   async (ctx) => {
-    try {
-      const users = User.find({}, '-password -salt')
-      ctx.body = users
-    } catch (err) {
-      this.throw(err, 500)
-    }
+    const users = User.find({}, '-password -salt')
+    ctx.body = users
   }
 )
 
 router.get('/:id',
   async (ctx) => {
-    try {
-      const user = await User.findById(ctx.params.id, '-password -salt')
-      if (!user) {
-        this.throw(404)
-      }
-      ctx.body = user
-    } catch (err) {
-      this.throw(err, 500)
+    const user = await User.findById(ctx.params.id, '-password -salt')
+    if (!user) {
+      ctx.throw(404)
     }
+
+    ctx.body = user
   }
 )
 
@@ -54,39 +47,31 @@ router.post('/',
 
 router.put('/:id',
   async (ctx) => {
-    try {
-      const user = await User.findById(ctx.params.id)
+    const user = await User.findById(ctx.params.id)
 
-      if (!user) {
-        throw new Error({ status: 404 })
-      }
-
-      Object.assign(user, ctx.request.body.user)
-
-      await user.save()
-
-      ctx.body = 200
-    } catch (err) {
+    if (!user) {
       ctx.throw(404)
     }
+
+    Object.assign(user, ctx.request.body.user)
+
+    await user.save()
+
+    ctx.body = 200
   }
 )
 
 router.delete('/:id',
   async (ctx) => {
-    try {
-      const user = await User.findById(ctx.params.id)
+    const user = await User.findById(ctx.params.id)
 
-      if (!user) {
-        throw new Error({ status: 404 })
-      }
-
-      await user.remove()
-
-      ctx.body = 200
-    } catch (err) {
+    if (!user) {
       ctx.throw(404)
     }
+
+    await user.remove()
+
+    ctx.body = 200
   }
 )
 
