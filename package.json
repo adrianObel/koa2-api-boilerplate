@@ -1,7 +1,7 @@
 {
-  "name": "koa2-boilerplate",
+  "name": "koa2-api-boilerplate",
   "version": "1.0.0",
-  "description": "Koa2 boilerplate covering all essensials",
+  "description": "Koa2 boilerplate covering essentials for APIs",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -10,6 +10,8 @@
     "lint": "eslint src/**/*.js"
   },
   "keywords": [
+    "koa2-api-boilerplate",
+    "api"
     "koa",
     "koa2",
     "boilerplate",

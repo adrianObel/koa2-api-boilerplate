@@ -1,1 +1,1 @@
-#koa-boilerplate
+#koa2-api-boilerplate
