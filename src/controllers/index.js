@@ -1,7 +1,7 @@
-import { Glob } from 'glob'
+import glob from 'glob'
 
 exports = module.exports = function Controllers(app) {
-  new Glob(`${__dirname}/*.js`, { ignore: '**/index.js' }, (err, matches) => {
+  glob(`${__dirname}/*.js`, { ignore: '**/index.js' }, (err, matches) => {
     if (err) { throw err }
 
     matches.forEach((file) => {
