@@ -8,7 +8,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findById(id, '-password')
+    const user = await User.findById(id, '-password -salt')
     done(null, user)
   } catch(err) {
     done(err)
