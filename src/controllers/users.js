@@ -25,7 +25,6 @@ router.get('/:id',
 
       ctx.body = user
     } catch (err) {
-
       if (err === 404 || err.name === 'CastError') {
         ctx.throw(404)
       }
@@ -72,9 +71,7 @@ router.put('/:id',
       ctx.body = {
         user
       }
-
     } catch (err) {
-
       if (err === 404 || err.name === 'CastError') {
         ctx.throw(404)
       }
@@ -97,7 +94,6 @@ router.delete('/:id',
 
       ctx.body = 200
     } catch (err) {
-
       if (err === 404 || err.name === 'CastError') {
         ctx.throw(404)
       }
