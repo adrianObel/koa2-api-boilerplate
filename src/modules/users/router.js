@@ -41,8 +41,9 @@ export default {
  *       "error": "Unprocessable Entity"
  *     }
  */
-  '/': {
+  'Create new users': {
     method: 'POST',
+    route: '/',
     controller: createUser
   }
 }
