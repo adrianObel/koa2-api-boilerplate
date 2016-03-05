@@ -1,4 +1,4 @@
-import app from '../config/server'
+import app from '../bin/server'
 import supertest from 'supertest'
 import { expect, should } from 'chai'
 import { cleanDb } from './utils'
