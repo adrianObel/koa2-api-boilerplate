@@ -1,5 +1,5 @@
 import User from '../models/users'
-import config from '../../config/config'
+import config from '../../config'
 import { verify } from 'jsonwebtoken'
 
 export async function ensureUser(ctx, next) {

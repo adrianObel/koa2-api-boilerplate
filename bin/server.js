@@ -5,9 +5,11 @@ import logger from 'koa-logger'
 import mongoose from 'mongoose'
 import session from 'koa-generic-session'
 import passport from 'koa-passport'
+import mount from 'koa-mount'
+import serve from 'koa-static'
 
 import config from '../config'
-import { errorMiddleware, docs } from '../src/middleware'
+import { errorMiddleware } from '../src/middleware'
 
 const app = new Koa()
 app.keys = [config.session]
@@ -18,7 +20,8 @@ app.use(convert(logger()))
 app.use(convert(bodyParser()))
 app.use(convert(session()))
 app.use(errorMiddleware())
-app.use(docs())
+
+app.use(convert(mount('/docs', serve(`${process.cwd()}/docs`))))
 
 require('../config/passport')
 app.use(passport.initialize())
