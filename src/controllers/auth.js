@@ -1,7 +1,7 @@
 import Router from 'koa-router'
 import passport from 'koa-passport'
 import jwt from 'jsonwebtoken'
-import config from '../../config/config'
+import config from '../../config'
 
 const router = new Router({ prefix: '/auth' })
 

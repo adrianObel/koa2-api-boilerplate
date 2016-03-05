@@ -1,6 +1,6 @@
 import Router from 'koa-router'
 import User from '../models/users'
-import config from '../../config/config'
+import config from '../../config'
 import jwt from 'jsonwebtoken'
 import { ensureUser } from '../middleware/validators'
 
