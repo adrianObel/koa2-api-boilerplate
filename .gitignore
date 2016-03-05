@@ -53,3 +53,6 @@ node_modules
 
 # sftp configuration file
 sftp-config.json
+
+#Documentation
+docs
