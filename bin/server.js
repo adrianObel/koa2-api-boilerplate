@@ -5,6 +5,7 @@ import logger from 'koa-logger'
 import mongoose from 'mongoose'
 import session from 'koa-generic-session'
 import passport from 'koa-passport'
+import serve from 'koa-static'
 
 import config from './config'
 import { errorMiddleware } from '../src/middleware'
@@ -18,6 +19,7 @@ app.use(convert(logger()))
 app.use(convert(bodyParser()))
 app.use(convert(session()))
 app.use(errorMiddleware())
+app.use(convert(serve(`${process.cwd()}/docs/`)))
 
 require('./passport')
 app.use(passport.initialize())
