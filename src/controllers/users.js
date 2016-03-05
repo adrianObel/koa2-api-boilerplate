@@ -6,6 +6,33 @@ import { ensureUser } from '../middleware/validators'
 
 const router = new Router({ prefix: '/users' })
 
+/**
+ * @api {get} /users Get all users
+ * @apiPermission user
+ * @apiVersion 1.0.0
+ * @apiName GetUsers
+ * @apiGroup Users
+ *
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X GET localhost:5000/users
+ *
+ * @apiSuccess {Object[]}   users           Array of user objects
+ * @apiSuccess {ObjectId}   users._id       User id
+ * @apiSuccess {String}     users.name      User name
+ * @apiSuccess {String}     users.username  User username
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "users": [{
+ *          "_id": "56bd1da600a526986cf65c80"
+ *          "username": "foo"
+ *          "username": "johndoe"
+ *       }]
+ *     }
+ *
+ * @apiUse TokenError
+ */
 router.get('/',
   ensureUser,
   async (ctx) => {
@@ -14,6 +41,33 @@ router.get('/',
   }
 )
 
+/**
+ * @api {get} /users/:id Get user by id
+ * @apiPermission user
+ * @apiVersion 1.0.0
+ * @apiName GetUser
+ * @apiGroup Users
+ *
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X GET localhost:5000/users/56bd1da600a526986cf65c80
+ *
+ * @apiSuccess {Object}   users             User object
+ * @apiSuccess {ObjectId}   users._id       User id
+ * @apiSuccess {String}     users.name      User name
+ * @apiSuccess {String}     users.username  User username
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "user": {
+ *          "_id": "56bd1da600a526986cf65c80"
+ *          "username": "foo"
+ *          "username": "johndoe"
+ *       }
+ *     }
+ *
+ * @apiUse TokenError
+ */
 router.get('/:id',
   ensureUser,
   async (ctx) => {
