@@ -9,7 +9,7 @@ const router = new Router({ prefix: '/auth' })
  * @apiDefine TokenError
  * @apiError Unauthorized Invalid JWT token
  *
- * @apiErrorExample {json} Error-Response:
+ * @apiErrorExample {json} Unauthorized-Error:
  *     HTTP/1.1 401 Unauthorized
  *     {
  *       "status": 401,
