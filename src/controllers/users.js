@@ -213,6 +213,26 @@ router.put('/:id',
   }
 )
 
+/**
+ * @api {delete} /users/:id Delete a user
+ * @apiPermission
+ * @apiVersion 1.0.0
+ * @apiName DeleteUser
+ * @apiGroup Users
+ *
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X DELETE localhost:5000/users/56bd1da600a526986cf65c80
+ *
+ * @apiSuccess {StatusCode} 200
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "status": 200
+ *     }
+ *
+ * @apiUse TokenError
+ */
 router.delete('/:id',
   ensureUser,
   async (ctx) => {
