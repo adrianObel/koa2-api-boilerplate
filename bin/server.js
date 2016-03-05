@@ -27,8 +27,8 @@ require('../config/passport')
 app.use(passport.initialize())
 app.use(passport.session())
 
-const router = require('../src/controllers')
-router(app)
+const modules = require('../src/modules')
+modules(app)
 
 app.listen(config.port, () => {
   console.log(`Server started on ${config.port}`)
