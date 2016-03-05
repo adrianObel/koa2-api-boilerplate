@@ -1,7 +1,8 @@
 import { ensureUser } from '../../middleware/validators'
 import {
   createUser,
-  getUsers
+  getUsers,
+  getUser
 } from './controller'
 
 export default {
@@ -82,6 +83,42 @@ export default {
     method: 'GET',
     route: '/',
     controller: getUsers,
+    middleware: [
+      ensureUser
+    ]
+  },
+
+  /**
+   * @api {get} /users/:id Get user by id
+   * @apiPermission user
+   * @apiVersion 1.0.0
+   * @apiName GetUser
+   * @apiGroup Users
+   *
+   * @apiExample Example usage:
+   * curl -H "Content-Type: application/json" -X GET localhost:5000/users/56bd1da600a526986cf65c80
+   *
+   * @apiSuccess {Object}   users           User object
+   * @apiSuccess {ObjectId} users._id       User id
+   * @apiSuccess {String}   users.name      User name
+   * @apiSuccess {String}   users.username  User username
+   *
+   * @apiSuccessExample {json} Success-Response:
+   *     HTTP/1.1 200 OK
+   *     {
+   *       "user": {
+   *          "_id": "56bd1da600a526986cf65c80"
+   *          "name": "John Doe"
+   *          "username": "johndoe"
+   *       }
+   *     }
+   *
+   * @apiUse TokenError
+   */
+  'Get a single user': {
+    method: 'GET',
+    route: '/:id',
+    controller: getUser,
     middleware: [
       ensureUser
     ]
