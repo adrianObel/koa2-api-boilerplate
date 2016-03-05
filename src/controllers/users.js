@@ -148,6 +148,46 @@ router.post('/',
   }
 )
 
+/**
+ * @api {put} /users/:id Update a user
+ * @apiPermission
+ * @apiVersion 1.0.0
+ * @apiName UpdateUser
+ * @apiGroup Users
+ *
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X PUT -d '{ "user": { "name": "Cool new Name" } }' localhost:5000/users/56bd1da600a526986cf65c80
+ *
+ * @apiParam {Object} user          User object (required)
+ * @apiParam {String} user.name     Name.
+ * @apiParam {String} user.username Username.
+ *
+ * @apiSuccess {Object}   users           User object
+ * @apiSuccess {ObjectId} users._id       User id
+ * @apiSuccess {String}   users.name      Updated name
+ * @apiSuccess {String}   users.username  Updated username
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "user": {
+ *          "_id": "56bd1da600a526986cf65c80"
+ *          "name": "Cool new name"
+ *          "username": "johndoe"
+ *       }
+ *     }
+ *
+ * @apiError UnprocessableEntity Missing required parameters
+ *
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 422 Unprocessable Entity
+ *     {
+ *       "status": 422,
+ *       "error": "Unprocessable Entity"
+ *     }
+ *
+ * @apiUse TokenError
+ */
 router.put('/:id',
   ensureUser,
   async (ctx) => {
