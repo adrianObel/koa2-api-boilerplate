@@ -21,3 +21,8 @@ export async function createUser(ctx) {
     ctx.throw(422, err)
   }
 }
+
+export async function getUsers (ctx) {
+  const users = await User.find({}, '-password -salt')
+  ctx.body = users
+}
