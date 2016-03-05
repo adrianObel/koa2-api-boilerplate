@@ -12,22 +12,30 @@ const router = new Router({ prefix: '/auth' })
  * @apiName AuthUser
  * @apiGroup Auth
  *
- * @apiParam {String} email User email.
- * @apiParam {String} password User password.
+ * @apiParam {String} username  User username.
+ * @apiParam {String} password  User password.
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X POST -d '{ "username": "johndoe@gmail.com", "password": "foo" }' localhost:5000/auth
+ *
+ * @apiSuccess {Object}   user           User object
+ * @apiSuccess {ObjectId} user._id       User id
+ * @apiSuccess {String}   user.name      User name
+ * @apiSuccess {String}   user.username  User username
+ * @apiSuccess {String}   token          Encoded JWT
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
  *       "user": {
+ *          "_id": "56bd1da600a526986cf65c80"
+ *          "username": "foo"
  *          "username": "johndoe"
  *        },
  *       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
  *     }
  *
- * @apiError UserNotFound The id of the User was not found.
+ * @apiError Unauthorized Incorrect credentials
  *
  * @apiErrorExample {json} Error-Response:
  *     HTTP/1.1 401 Unauthorized
