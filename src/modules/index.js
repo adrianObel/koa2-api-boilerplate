@@ -1,6 +1,5 @@
 import glob from 'glob'
 import Router from 'koa-router'
-import convert from 'koa-convert'
 
 exports = module.exports = function initModules(app) {
   glob(`${__dirname}/*`, { ignore: '**/index.js' }, (err, matches) => {
@@ -16,11 +15,10 @@ exports = module.exports = function initModules(app) {
         const {
           method = '',
           route = '',
-          middleware = [],
-          controller
+          handlers = []
         } = props
 
-        router[method.toLowerCase()](route, ...middleware, controller)
+        router[method.toLowerCase()](route, ...handlers)
 
         app
           .use(router.routes())
