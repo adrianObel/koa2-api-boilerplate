@@ -1,6 +1,6 @@
 import passport from 'koa-passport'
 import jwt from 'jsonwebtoken'
-import config from '../../config'
+import config from '../../../config'
 
 export async function authUser(ctx, next) {
   return passport.authenticate('local', (user) => {
