@@ -65,3 +65,22 @@ export async function updateUser(ctx) {
     ctx.throw(500)
   }
 }
+
+export async function deleteUser(ctx) {
+  try {
+    const user = await User.findById(ctx.params.id)
+    if (!user) {
+      ctx.throw(404)
+    }
+
+    await user.remove()
+
+    ctx.body = 200
+  } catch (err) {
+    if (err === 404 || err.name === 'CastError') {
+      ctx.throw(404)
+    }
+
+    ctx.throw(500)
+  }
+}

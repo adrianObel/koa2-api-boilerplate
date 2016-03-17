@@ -37,5 +37,14 @@ export default {
       ensureUser,
       user.updateUser
     ]
+  },
+
+  'Delete user': {
+    method: 'DELETE',
+    route: '/:id',
+    handlers: [
+      ensureUser,
+      user.deleteUser
+    ]
   }
 }
