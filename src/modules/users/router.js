@@ -32,6 +32,7 @@ export default [
     route: '/:id',
     handlers: [
       ensureUser,
+      user.getUser,
       user.updateUser
     ]
   },
@@ -40,6 +41,7 @@ export default [
     route: '/:id',
     handlers: [
       ensureUser,
+      user.getUser,
       user.deleteUser
     ]
   }

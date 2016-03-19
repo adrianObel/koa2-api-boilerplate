@@ -56,7 +56,15 @@ describe('Users', () => {
       request
         .get(`/users?token=${token}`)
         .set('Accept', 'application/json')
-        .expect(200, done)
+        .expect(200, (err, res) => {
+          if (err) { return done(err) }
+
+          res.body.should.have.property('users')
+
+          res.body.users.should.have.length(1)
+
+          done()
+        })
     })
   })
 
