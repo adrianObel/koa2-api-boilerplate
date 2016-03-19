@@ -4,19 +4,19 @@ export async function createUser(ctx) {
   const user = new User(ctx.request.body.user)
   try {
     await user.save()
-    const token = user.generateToken()
-
-    const response = user.toJSON()
-
-    delete response.password
-    delete response.salt
-
-    ctx.body = {
-      user: response,
-      token
-    }
   } catch (err) {
-    ctx.throw(422, err)
+    ctx.throw(422, err.message)
+  }
+
+  const token = user.generateToken()
+  const response = user.toJSON()
+
+  delete response.password
+  delete response.salt
+
+  ctx.body = {
+    user: response,
+    token
   }
 }
 
@@ -65,6 +65,6 @@ export async function deleteUser(ctx) {
 
   ctx.status = 200
   ctx.body = {
-    sucess: true
+    success: true
   }
 }
