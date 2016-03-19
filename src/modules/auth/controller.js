@@ -1,9 +1,6 @@
-import Router from 'koa-router'
 import passport from 'koa-passport'
 import jwt from 'jsonwebtoken'
-import config from '../../config'
-
-const router = new Router({ prefix: '/auth' })
+import config from '../../../config'
 
 /**
  * @apiDefine TokenError
@@ -55,8 +52,9 @@ const router = new Router({ prefix: '/auth' })
  *       "error": "Unauthorized"
  *     }
  */
-router.post('/', async (ctx, next) =>
-  passport.authenticate('local', (user) => {
+
+export async function authUser(ctx, next) {
+  return passport.authenticate('local', (user) => {
     if (!user) {
       ctx.throw(401)
     }
@@ -73,6 +71,4 @@ router.post('/', async (ctx, next) =>
       user: response
     }
   })(ctx, next)
-)
-
-export default router
+}
