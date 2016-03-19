@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
+import config from '../../config'
+import jwt from 'jsonwebtoken'
 
 const User = new mongoose.Schema({
   type: { type: String, default: 'User' },
@@ -45,6 +47,12 @@ User.methods.validatePassword = function validatePassword(password) {
       resolve(isMatch)
     })
   })
+}
+
+User.methods.generateToken = function generateToken() {
+  const user = this
+
+  return jwt.sign({ id: user.id }, config.token)
 }
 
 export default mongoose.model('user', User)
