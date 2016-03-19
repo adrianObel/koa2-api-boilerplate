@@ -44,7 +44,9 @@ git clone https://github.com/adrianObel/koa2-api-boilerplate.git
 │   ├── index.js             # Config entrypoint - exports config according to envionrment and commons
 │   └── passport.js          # Passportjs config of strategies
 ├── src                      # Source code
-│   ├── controllers          # Routes
+│   ├── modules
+│   │   ├── controller.js    # Module-specific controllers
+│   │   └── router.js        # Router definitions for module
 │   ├── models               # Mongoose models
 │   └── middleware           # Custom middleware
 │       └── validators       # Validation middleware
