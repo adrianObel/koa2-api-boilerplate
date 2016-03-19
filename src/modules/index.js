@@ -6,24 +6,25 @@ exports = module.exports = function initModules(app) {
     if (err) { throw err }
 
     matches.forEach((mod) => {
-      const routerConfig = require(`${mod}/router`).default
-      const router = new Router({ prefix: routerConfig.base })
+      const router = require(`${mod}/router`)
 
-      for (const [key, props] of Object.entries(routerConfig)) {
-        if (key === 'base') { continue }
+      const routes = router.default
+      const baseUrl = router.baseUrl
+      const instance = new Router({ prefix: baseUrl })
 
+      routes.forEach((config) => {
         const {
           method = '',
           route = '',
           handlers = []
-        } = props
+        } = config
 
-        router[method.toLowerCase()](route, ...handlers)
+        instance[method.toLowerCase()](route, ...handlers)
 
         app
-          .use(router.routes())
-          .use(router.allowedMethods())
-      }
+          .use(instance.routes())
+          .use(instance.allowedMethods())
+      })
     })
   })
 }

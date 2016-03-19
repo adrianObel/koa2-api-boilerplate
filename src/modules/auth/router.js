@@ -1,13 +1,13 @@
 import * as auth from './controller'
 
-export default {
-  base: '/auth',
+export const baseUrl = '/auth'
 
-  'Authenticate user': {
+export default [
+  {
     method: 'POST',
     route: '/',
     handlers: [
       auth.authUser
     ]
   }
-}
+]

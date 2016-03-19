@@ -1,18 +1,17 @@
 import { ensureUser } from '../../middleware/validators'
 import * as user from './controller'
 
-export default {
-  base: '/users',
+export const baseUrl = '/users'
 
-  'Create new users': {
+export default [
+  {
     method: 'POST',
     route: '/',
     handlers: [
       user.createUser
     ]
   },
-
-  'Get all users': {
+  {
     method: 'GET',
     route: '/',
     handlers: [
@@ -20,8 +19,7 @@ export default {
       user.getUsers
     ]
   },
-
-  'Get a single user': {
+  {
     method: 'GET',
     route: '/:id',
     handlers: [
@@ -29,8 +27,7 @@ export default {
       user.getUser
     ]
   },
-
-  'Update user': {
+  {
     method: 'PUT',
     route: '/:id',
     handlers: [
@@ -38,8 +35,7 @@ export default {
       user.updateUser
     ]
   },
-
-  'Delete user': {
+  {
     method: 'DELETE',
     route: '/:id',
     handlers: [
@@ -47,4 +43,4 @@ export default {
       user.deleteUser
     ]
   }
-}
+]
