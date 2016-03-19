@@ -34,7 +34,9 @@ export async function getUser(ctx) {
       ctx.throw(404)
     }
 
-    ctx.body = user
+    ctx.body = {
+      user
+    }
   } catch (err) {
     if (err === 404 || err.name === 'CastError') {
       ctx.throw(404)
@@ -75,7 +77,10 @@ export async function deleteUser(ctx) {
 
     await user.remove()
 
-    ctx.body = 200
+    ctx.status = 200
+    ctx.body = {
+      success: true
+    }
   } catch (err) {
     if (err === 404 || err.name === 'CastError') {
       ctx.throw(404)
