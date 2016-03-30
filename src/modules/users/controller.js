@@ -50,8 +50,7 @@ export async function createUser(ctx) {
   const response = user.toJSON()
 
   delete response.password
-  delete response.salt
-
+  
   ctx.body = {
     user: response,
     token
@@ -86,7 +85,7 @@ export async function createUser(ctx) {
  * @apiUse TokenError
  */
 export async function getUsers(ctx) {
-  const users = await User.find({}, '-password -salt')
+  const users = await User.find({}, '-password')
   ctx.body = { users }
 }
 
@@ -119,7 +118,7 @@ export async function getUsers(ctx) {
  */
 export async function getUser(ctx, next) {
   try {
-    const user = await User.findById(ctx.params.id, '-password -salt')
+    const user = await User.findById(ctx.params.id, '-password')
     if (!user) {
       ctx.throw(404)
     }

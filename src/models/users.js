@@ -7,8 +7,7 @@ const User = new mongoose.Schema({
   type: { type: String, default: 'User' },
   name: { type: String },
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  salt: { type: String }
+  password: { type: String, required: true }
 })
 
 User.pre('save', function preSave(next) {
@@ -29,7 +28,6 @@ User.pre('save', function preSave(next) {
       if (err) { throw new Error(err) }
 
       user.password = hash
-      user.salt = salt
 
       next(null)
     })

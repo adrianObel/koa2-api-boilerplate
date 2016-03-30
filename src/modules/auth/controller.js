@@ -64,7 +64,6 @@ export async function authUser(ctx, next) {
     const response = user.toJSON()
 
     delete response.password
-    delete response.salt
 
     ctx.body = {
       token,
