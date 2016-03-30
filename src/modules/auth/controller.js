@@ -1,6 +1,4 @@
 import passport from 'koa-passport'
-import jwt from 'jsonwebtoken'
-import config from '../../../config'
 
 /**
  * @apiDefine TokenError
@@ -37,7 +35,6 @@ import config from '../../../config'
  *     {
  *       "user": {
  *          "_id": "56bd1da600a526986cf65c80"
- *          "username": "foo"
  *          "username": "johndoe"
  *        },
  *       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
@@ -59,7 +56,7 @@ export async function authUser(ctx, next) {
       ctx.throw(401)
     }
 
-    const token = jwt.sign({ id: user.id }, config.token)
+    const token = user.generateToken()
 
     const response = user.toJSON()
 
