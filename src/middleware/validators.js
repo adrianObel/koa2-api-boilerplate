@@ -16,7 +16,7 @@ export async function ensureUser(ctx, next) {
     ctx.throw(401)
   }
 
-  const user = await User.findById(decoded.id, '-password -salt')
+  const user = await User.findById(decoded.id, '-password')
   if (!user) {
     ctx.throw(401)
   }

@@ -33,7 +33,6 @@ describe('Users', () => {
           res.body.user.should.have.property('username')
           res.body.user.username.should.equal('supercoolname')
           expect(res.body.user.password).to.not.exist
-          expect(res.body.user.salt).to.not.exist
 
           context.user = res.body.user
           context.token = res.body.token
@@ -99,7 +98,6 @@ describe('Users', () => {
           res.body.should.have.property('user')
 
           expect(res.body.user.password).to.not.exist
-          expect(res.body.user.salt).to.not.exist
 
           done()
         })
@@ -138,7 +136,6 @@ describe('Users', () => {
           res.body.user.should.have.property('username')
           res.body.user.username.should.equal('updatedcoolname')
           expect(res.body.user.password).to.not.exist
-          expect(res.body.user.salt).to.not.exist
 
           done()
         })
