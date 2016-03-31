@@ -43,18 +43,52 @@ describe('Users', () => {
   })
 
   describe('GET /users', () => {
+    it('should not fetch users if the authorization header is missing', (done) => {
+      request
+        .get('/users')
+        .set('Accept', 'application/json')
+        .expect(401, done)
+    })
+
+    it('should not fetch users if the authorization header is missing the scheme', (done) => {
+      request
+        .get('/users')
+        .set({
+          Accept: 'application/json',
+          Authorization: '1'
+        })
+        .expect(401, done)
+    })
+
+    it('should not fetch users if the authorization header has invalid scheme', (done) => {
+      const { token } = context
+      request
+        .get('/users')
+        .set({
+          Accept: 'application/json',
+          Authorization: 'Unknown ${token}'
+        })
+        .expect(401, done)
+    })
+
     it('should not fetch users if token is invalid', (done) => {
       request
-        .get('/users?token=1')
-        .set('Accept', 'application/json')
+        .get('/users')
+        .set({
+          Accept: 'application/json',
+          Authorization: 'Bearer 1'
+        })
         .expect(401, done)
     })
 
     it('should fetch all users', (done) => {
       const { token } = context
       request
-        .get(`/users?token=${token}`)
-        .set('Accept', 'application/json')
+        .get('/users')
+        .set({
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`
+        })
         .expect(200, (err, res) => {
           if (err) { return done(err) }
 
@@ -70,16 +104,22 @@ describe('Users', () => {
   describe('GET /users/:id', () => {
     it('should not fetch user if token is invalid', (done) => {
       request
-        .get('/users/1?token=1')
-        .set('Accept', 'application/json')
+        .get('/users/1')
+        .set({
+          Accept: 'application/json',
+          Authorization: 'Bearer 1'
+        })
         .expect(401, done)
     })
 
     it('should throw 404 if user doesn\'t exist', (done) => {
       const { token } = context
       request
-        .get(`/users/1?token=${token}`)
-        .set('Accept', 'application/json')
+        .get('/users/1')
+        .set({
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`
+        })
         .expect(404, done)
     })
 
@@ -90,8 +130,11 @@ describe('Users', () => {
       } = context
 
       request
-        .get(`/users/${_id}?token=${token}`)
-        .set('Accept', 'application/json')
+        .get(`/users/${_id}`)
+        .set({
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`
+        })
         .expect(200, (err, res) => {
           if (err) { return done(err) }
 
@@ -107,16 +150,22 @@ describe('Users', () => {
   describe('PUT /users/:id', () => {
     it('should not update user if token is invalid', (done) => {
       request
-        .put('/users/1?token=1')
-        .set('Accept', 'application/json')
+        .put('/users/1')
+        .set({
+          Accept: 'application/json',
+          Authorization: 'Bearer 1'
+        })
         .expect(401, done)
     })
 
     it('should throw 404 if user doesn\'t exist', (done) => {
       const { token } = context
       request
-        .put(`/users/1?token=${token}`)
-        .set('Accept', 'application/json')
+        .put('/users/1')
+        .set({
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`
+        })
         .expect(404, done)
     })
 
@@ -127,8 +176,11 @@ describe('Users', () => {
       } = context
 
       request
-        .put(`/users/${_id}?token=${token}`)
-        .set('Accept', 'application/json')
+        .put(`/users/${_id}`)
+        .set({
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`
+        })
         .send({ user: { username: 'updatedcoolname' } })
         .expect(200, (err, res) => {
           if (err) { return done(err) }
@@ -145,16 +197,22 @@ describe('Users', () => {
   describe('DELETE /users/:id', () => {
     it('should not delete user if token is invalid', (done) => {
       request
-        .delete('/users/1?token=1')
-        .set('Accept', 'application/json')
+        .delete('/users/1')
+        .set({
+          Accept: 'application/json',
+          Authorization: 'Bearer 1'
+        })
         .expect(401, done)
     })
 
     it('should throw 404 if user doesn\'t exist', (done) => {
       const { token } = context
       request
-        .delete(`/users/1?token=${token}`)
-        .set('Accept', 'application/json')
+        .delete('/users/1')
+        .set({
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`
+        })
         .expect(404, done)
     })
 
@@ -165,8 +223,11 @@ describe('Users', () => {
       } = context
 
       request
-        .delete(`/users/${_id}?token=${token}`)
-        .set('Accept', 'application/json')
+        .delete(`/users/${_id}`)
+        .set({
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`
+        })
         .expect(200, done)
     })
   })
