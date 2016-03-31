@@ -50,7 +50,7 @@ export async function createUser(ctx) {
   const response = user.toJSON()
 
   delete response.password
-  
+
   ctx.body = {
     user: response,
     token
