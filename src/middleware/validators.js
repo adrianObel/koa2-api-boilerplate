@@ -1,23 +1,7 @@
 import User from '../models/users'
 import config from '../../config'
+import { getToken } from '../utils/auth'
 import { verify } from 'jsonwebtoken'
-
-function getToken(ctx) {
-  const header = ctx.request.header.authorization
-  if (!header) {
-    return null
-  }
-  const parts = header.split(' ')
-  if (parts.length !== 2) {
-    return null
-  }
-  const scheme = parts[0]
-  const token = parts[1]
-  if (/^Bearer$/i.test(scheme)) {
-    return token
-  }
-  return null
-}
 
 export async function ensureUser(ctx, next) {
   const token = getToken(ctx)
