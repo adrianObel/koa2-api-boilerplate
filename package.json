@@ -1,6 +1,6 @@
 {
   "name": "koa2-api-boilerplate",
-  "version": "1.2.0",
+  "version": "2.1.2",
   "description": "Koa2 boilerplate covering essentials for APIs",
   "main": "index.js",
   "scripts": {
