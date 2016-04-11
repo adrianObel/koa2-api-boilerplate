@@ -19,7 +19,11 @@ exports = module.exports = function initModules(app) {
           handlers = []
         } = config
 
-        instance[method.toLowerCase()](route, ...handlers)
+        const lastHandler = handlers.pop()
+
+        instance[method.toLowerCase()](route, ...handlers, async function(ctx) {
+          return await lastHandler(ctx)
+        })
 
         app
           .use(instance.routes())
