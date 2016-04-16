@@ -66,7 +66,7 @@ describe('Users', () => {
         .get('/users')
         .set({
           Accept: 'application/json',
-          Authorization: 'Unknown ${token}'
+          Authorization: `Unknown ${token}`
         })
         .expect(401, done)
     })
