@@ -17,8 +17,8 @@ app.keys = [config.session]
 mongoose.connect(config.database)
 
 app.use(convert(logger()))
-app.use(convert(bodyParser()))
-app.use(convert(session()))
+app.use(bodyParser())
+app.use(session())
 app.use(errorMiddleware())
 
 app.use(convert(mount('/docs', serve(`${process.cwd()}/docs`))))
