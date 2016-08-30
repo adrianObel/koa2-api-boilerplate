@@ -38,7 +38,7 @@ import User from '../../models/users'
  *       "error": "Unprocessable Entity"
  *     }
  */
-export async function createUser(ctx) {
+export async function createUser (ctx) {
   const user = new User(ctx.request.body.user)
   try {
     await user.save()
@@ -84,7 +84,7 @@ export async function createUser(ctx) {
  *
  * @apiUse TokenError
  */
-export async function getUsers(ctx) {
+export async function getUsers (ctx) {
   const users = await User.find({}, '-password')
   ctx.body = { users }
 }
@@ -116,7 +116,7 @@ export async function getUsers(ctx) {
  *
  * @apiUse TokenError
  */
-export async function getUser(ctx, next) {
+export async function getUser (ctx, next) {
   try {
     const user = await User.findById(ctx.params.id, '-password')
     if (!user) {
@@ -134,7 +134,7 @@ export async function getUser(ctx, next) {
     ctx.throw(500)
   }
 
-  if(next) return next()
+  if (next) { return next() }
 }
 
 /**
@@ -177,7 +177,7 @@ export async function getUser(ctx, next) {
  *
  * @apiUse TokenError
  */
-export async function updateUser(ctx) {
+export async function updateUser (ctx) {
   const user = ctx.body.user
 
   Object.assign(user, ctx.request.body.user)
@@ -210,7 +210,7 @@ export async function updateUser(ctx) {
  * @apiUse TokenError
  */
 
-export async function deleteUser(ctx) {
+export async function deleteUser (ctx) {
   const user = ctx.body.user
 
   await user.remove()

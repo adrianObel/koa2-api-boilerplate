@@ -3,7 +3,7 @@ import config from '../../config'
 import { getToken } from '../utils/auth'
 import { verify } from 'jsonwebtoken'
 
-export async function ensureUser(ctx, next) {
+export async function ensureUser (ctx, next) {
   const token = getToken(ctx)
 
   if (!token) {

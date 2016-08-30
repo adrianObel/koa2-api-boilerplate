@@ -1,4 +1,6 @@
 #koa2-api-boilerplate
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+
 Boilerplate for building APIs with [koa2](https://github.com/koajs/koa/tree/v2.x) and mongodb.
 
 This project covers basic necessities of most APIs.
@@ -6,6 +8,7 @@ This project covers basic necessities of most APIs.
 * Database (mongoose)
 * Testing (mocha)
 * Doc generation with apidoc
+* linting using standard
 
 ##Requirements
 * node __^4.0.0__
