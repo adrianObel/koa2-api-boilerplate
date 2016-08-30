@@ -3,7 +3,7 @@ import config from '../../config'
 import { getToken } from '../utils/auth'
 import { verify } from 'jsonwebtoken'
 
-export async function ensureUser(ctx, next) {
+export async function ensureUser (ctx, next) {
   const token = getToken(ctx)
 
   if (!token) {
@@ -17,8 +17,8 @@ export async function ensureUser(ctx, next) {
     ctx.throw(401)
   }
 
-  const user = await User.findById(decoded.id, '-password')
-  if (!user) {
+  ctx.state.user = await User.findById(decoded.id, '-password')
+  if (!ctx.state.user) {
     ctx.throw(401)
   }
 

@@ -1,4 +1,4 @@
-export function getToken(ctx) {
+export function getToken (ctx) {
   const header = ctx.request.header.authorization
   if (!header) {
     return null

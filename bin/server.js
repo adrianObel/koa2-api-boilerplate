@@ -14,6 +14,7 @@ import { errorMiddleware } from '../src/middleware'
 const app = new Koa()
 app.keys = [config.session]
 
+mongoose.Promise = global.Promise
 mongoose.connect(config.database)
 
 app.use(convert(logger()))

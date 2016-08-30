@@ -1,4 +1,4 @@
-export function errorMiddleware() {
+export function errorMiddleware () {
   return async (ctx, next) => {
     try {
       await next()
