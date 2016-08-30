@@ -18,7 +18,8 @@
     "boilerplate",
     "es6",
     "mongoose",
-    "passportjs"
+    "passportjs",
+    "apidoc"
   ],
   "author": "Adrian Obelmejias <adrian@obel.me>",
   "license": "MIT",
@@ -31,14 +32,15 @@
     "url": "https://github.com/adrianObel/koa2-api-boilerplate"
   },
   "dependencies": {
+    "apidoc": "^0.16.1",
     "babel-core": "^6.5.1",
     "babel-polyfill": "^6.5.0",
     "babel-preset-es2015-node5": "^1.2.0",
     "babel-preset-stage-0": "^6.5.0",
     "bcrypt": "^0.8.5",
     "glob": "^7.0.0",
-    "jsonwebtoken": "^5.5.4",
-    "koa": "^2.0.0-alpha.3",
+    "jsonwebtoken": "^7.1.9",
+    "koa": "^2.0.0-alpha.6",
     "koa-bodyparser": "^3.0.0",
     "koa-convert": "^1.2.0",
     "koa-generic-session": "^1.10.1",
@@ -51,15 +53,13 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "apidoc": "^0.15.1",
     "babel-eslint": "^6.0.2",
     "babel-register": "^6.5.1",
     "chai": "^3.5.0",
-    "eslint": "^2.8.0",
-    "eslint-config-airbnb": "^7.0.0",
-    "eslint-plugin-react": "^4.3.0",
-    "mocha": "^2.4.5",
+    "eslint": "^3.4.0",
+    "eslint-config-airbnb": "^10.0.1",
+    "mocha": "^3.0.2",
     "nodemon": "^1.8.1",
-    "supertest": "^1.2.0"
+    "supertest": "^2.0.0"
   }
 }
