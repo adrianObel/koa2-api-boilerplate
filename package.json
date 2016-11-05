@@ -50,7 +50,8 @@
     "koa-static": "^2.0.0",
     "lodash": "^4.16.6",
     "mongoose": "^4.4.3",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "winston": "^2.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.0",
