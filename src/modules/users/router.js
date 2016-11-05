@@ -1,4 +1,5 @@
-import { ensureUser } from '../../middleware/validators'
+import { ensureUser } from '../../utils/validators'
+import { fromStateToBody } from '../../utils/response'
 import * as user from './controller'
 
 export const baseUrl = '/users'
@@ -16,7 +17,8 @@ export default [
     route: '/',
     handlers: [
       ensureUser,
-      user.getUsers
+      user.getUsers,
+      fromStateToBody(['users'])
     ]
   },
   {
@@ -24,7 +26,8 @@ export default [
     route: '/:id',
     handlers: [
       ensureUser,
-      user.getUser
+      user.getUser,
+      fromStateToBody(['user'])
     ]
   },
   {

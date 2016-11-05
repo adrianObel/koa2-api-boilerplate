@@ -84,9 +84,11 @@ export async function createUser (ctx) {
  *
  * @apiUse TokenError
  */
-export async function getUsers (ctx) {
+export async function getUsers (ctx, next) {
   const users = await User.find({}, '-password')
-  ctx.body = { users }
+  ctx.state.users = users
+
+  return next()
 }
 
 /**
@@ -123,9 +125,7 @@ export async function getUser (ctx, next) {
       ctx.throw(404)
     }
 
-    ctx.body = {
-      user
-    }
+    ctx.state.user = user
   } catch (err) {
     if (err === 404 || err.name === 'CastError') {
       ctx.throw(404)
@@ -134,7 +134,7 @@ export async function getUser (ctx, next) {
     ctx.throw(500)
   }
 
-  if (next) { return next() }
+  return next()
 }
 
 /**
@@ -178,7 +178,7 @@ export async function getUser (ctx, next) {
  * @apiUse TokenError
  */
 export async function updateUser (ctx) {
-  const user = ctx.body.user
+  const user = ctx.state.user
 
   Object.assign(user, ctx.request.body.user)
 
@@ -211,7 +211,7 @@ export async function updateUser (ctx) {
  */
 
 export async function deleteUser (ctx) {
-  const user = ctx.body.user
+  const user = ctx.state.user
 
   await user.remove()
 

@@ -7,7 +7,7 @@ import mount from 'koa-mount'
 import serve from 'koa-static'
 
 import config from '../config'
-import { errorMiddleware } from '../src/middleware'
+import { errorMiddleware } from '../src/utils/errors'
 
 const app = new Koa()
 app.keys = [config.session]
