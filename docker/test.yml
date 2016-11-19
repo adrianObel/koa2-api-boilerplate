@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  api-server:
+    environment:
+      - NODE_ENV=test
+      - DATABASE_URL=mongodb://localhost:27017/koa2-boilerplate-test
+      - JWT_TOKEN_SECRET=secret-jwt-token

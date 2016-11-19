@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  api-server:
+    environment:
+      - NODE_ENV=development
+      - JWT_TOKEN_SECRET=secret-jwt-token
+      - DATABASE_URL=mongodb://mongodb:27017/koa2-boilerplate-dev
