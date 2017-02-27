@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { getToken } from '../../src/utils/auth'
+import { getToken } from 'utils/auth'
 
 describe('(Util) auth', () => {
   describe('getToken', () => {
