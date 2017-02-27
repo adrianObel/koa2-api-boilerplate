@@ -1,4 +1,4 @@
-import { ensureUser } from 'utils/validators'
+import { validateSession } from 'utils/validators'
 import { fromStateToBody } from 'utils/response'
 import * as user from './controller'
 
@@ -16,7 +16,7 @@ export default [
     method: 'GET',
     route: '/',
     handlers: [
-      ensureUser,
+      validateSession,
       user.getUsers,
       fromStateToBody(['users'])
     ]
@@ -25,7 +25,7 @@ export default [
     method: 'GET',
     route: '/:id',
     handlers: [
-      ensureUser,
+      validateSession,
       user.getUser,
       fromStateToBody(['user'])
     ]
@@ -34,7 +34,7 @@ export default [
     method: 'PUT',
     route: '/:id',
     handlers: [
-      ensureUser,
+      validateSession,
       user.getUser,
       user.updateUser
     ]
@@ -43,7 +43,7 @@ export default [
     method: 'DELETE',
     route: '/:id',
     handlers: [
-      ensureUser,
+      validateSession,
       user.getUser,
       user.deleteUser
     ]

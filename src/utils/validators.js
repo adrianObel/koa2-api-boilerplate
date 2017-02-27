@@ -3,7 +3,7 @@ import config from 'config'
 import User from 'models/users'
 import { getToken } from 'utils/auth'
 
-export async function ensureUser (ctx, next) {
+export async function validateSession (ctx, next) {
   const token = getToken(ctx)
 
   if (!token) {
