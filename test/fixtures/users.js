@@ -15,12 +15,11 @@ export function createUser (attributes) {
 export function getAuthToken (agent, { username, password }) {
   return new Promise((resolve, reject) => {
     agent
-    .post('/users')
+    .post('/auth')
     .set('Accept', 'application/json')
     .send({ username, password })
     .end((err, res) => {
       if (err) { return reject(err) }
-
       resolve(res.body.token)
     })
   })
