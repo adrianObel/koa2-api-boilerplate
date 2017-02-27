@@ -17,7 +17,6 @@ function generateContext (token) {
 
 describe('(Util) validators', () => {
   describe('validateSession', () => {
-    after
     it('should throw 401 if auth token is not provided', () => {
       const next = sinon.spy()
       const mockContext = generateContext('')
