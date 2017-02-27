@@ -8,7 +8,7 @@ should()
 const request = supertest.agent(app.listen())
 const context = {}
 
-describe('Auth', () => {
+describe('(Module) Auth', () => {
   beforeEach(async () => {
     await cleanDb()
 
