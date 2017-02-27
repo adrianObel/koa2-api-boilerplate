@@ -1,6 +1,7 @@
 import app from '../../bin/server'
 import supertest from 'supertest'
 import { expect, should } from 'chai'
+import faker from 'faker'
 import { cleanDb } from '../testUtils'
 import { createUser, getAuthToken } from '../fixtures/users'
 
@@ -27,15 +28,22 @@ describe('(Module) Users', () => {
     })
 
     it('should sign up', (done) => {
+      const userData = {
+        user: {
+          name: faker.name.findName(),
+          username: faker.internet.userName(),
+          password: faker.internet.password()
+        }
+      }
       request
         .post('/users')
         .set('Accept', 'application/json')
-        .send({ user: { username: 'supercoolname', password: 'supersecretpassword' } })
+        .send(userData)
         .expect(200, (err, res) => {
           if (err) { return done(err) }
 
           res.body.user.should.have.property('username')
-          res.body.user.username.should.equal('supercoolname')
+          res.body.user.username.should.equal(userData.user.username)
           expect(res.body.user.password).to.not.exist
           done()
         })

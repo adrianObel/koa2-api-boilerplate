@@ -3,7 +3,12 @@ export function errorMiddleware () {
     try {
       await next()
     } catch (err) {
-      ctx.status = err.status || 500
+      if (err.isJoi) {
+        ctx.status = 422
+      } else {
+        ctx.status = err.status || 500
+      }
+
       ctx.body = err.message
       ctx.app.emit('error', err, ctx)
     }
