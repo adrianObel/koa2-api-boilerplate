@@ -1,5 +1,5 @@
-import { ensureUser } from '../../utils/validators'
-import { fromStateToBody } from '../../utils/response'
+import { ensureUser } from 'utils/validators'
+import { fromStateToBody } from 'utils/response'
 import * as user from './controller'
 
 export const baseUrl = '/users'

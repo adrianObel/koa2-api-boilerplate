@@ -1,4 +1,4 @@
-import User from '../../models/users'
+import User from 'models/users'
 
 export async function createUser (ctx) {
   const user = new User(ctx.request.body.user)

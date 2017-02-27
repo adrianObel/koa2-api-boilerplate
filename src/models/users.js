@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
-import config from '../../config'
 import jwt from 'jsonwebtoken'
+import config from 'config'
 
 const User = new mongoose.Schema({
   type: { type: String, default: 'User' },

@@ -1,7 +1,7 @@
-import User from '../models/users'
-import config from '../../config'
-import { getToken } from '../utils/auth'
 import { verify } from 'jsonwebtoken'
+import config from 'config'
+import User from 'models/users'
+import { getToken } from 'utils/auth'
 
 export async function ensureUser (ctx, next) {
   const token = getToken(ctx)
