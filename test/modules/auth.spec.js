@@ -1,7 +1,7 @@
 import app from '../../bin/server'
 import supertest from 'supertest'
 import { expect, should } from 'chai'
-import { cleanDb } from '../utils'
+import { cleanDb } from '../testUtils'
 import { createUser, getAuthToken } from '../fixtures/users'
 
 should()
@@ -9,7 +9,7 @@ const request = supertest.agent(app.listen())
 const context = {}
 
 describe('Auth', () => {
-  before(async () => {
+  beforeEach(async () => {
     await cleanDb()
 
     context.credentials = { username: 'foo', password: 'foopass' }
