@@ -55,6 +55,7 @@
     "winston": "^2.3.0"
   },
   "devDependencies": {
+    "faker": "^4.1.0",
     "babel-eslint": "^7.1.0",
     "babel-register": "^6.5.1",
     "chai": "^3.5.0",
