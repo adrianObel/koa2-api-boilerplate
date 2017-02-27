@@ -35,8 +35,6 @@
     "apidoc": "^0.16.1",
     "babel-core": "^6.5.1",
     "babel-polyfill": "^6.5.0",
-    "babel-preset-es2015-node5": "^1.2.0",
-    "babel-preset-stage-0": "^6.5.0",
     "bcrypt": "^0.8.5",
     "glob": "^7.0.0",
     "jsonwebtoken": "^7.1.9",
