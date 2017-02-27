@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "./node_modules/.bin/nodemon index.js",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-register --require babel-polyfill",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha test/**/*.spec.js --compilers js:babel-register --require babel-polyfill",
     "lint": "eslint src/**/*.js",
     "docs": "./node_modules/.bin/apidoc -i src/ -o docs"
   },

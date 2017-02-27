@@ -1,7 +1,7 @@
-import app from '../bin/server'
+import app from '../../bin/server'
 import supertest from 'supertest'
 import { expect, should } from 'chai'
-import { cleanDb } from './utils'
+import { cleanDb } from '../utils'
 
 should()
 const request = supertest.agent(app.listen())
