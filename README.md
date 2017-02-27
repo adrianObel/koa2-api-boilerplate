@@ -11,7 +11,7 @@ This project covers basic necessities of most APIs.
 * linting using standard
 
 ##Requirements
-* node __^4.0.0__
+* node __^7.6.0__
 * npm __^3.0.0__
 
 ##Installation

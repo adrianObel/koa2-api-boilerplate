@@ -21,7 +21,7 @@ exports = module.exports = function initModules (app) {
 
         const lastHandler = handlers.pop()
 
-        instance[method.toLowerCase()](route, ...handlers, async function(ctx) {
+        instance[method.toLowerCase()](route, ...handlers, async function (ctx) {
           return await lastHandler(ctx)
         })
 

@@ -1,5 +1,5 @@
 ## Base docker image
-FROM node:6-slim
+FROM node:7.6-slim
 
 ## Make directory for app
 RUN mkdir -p /opt/app/
