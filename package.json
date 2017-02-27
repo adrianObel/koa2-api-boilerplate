@@ -34,6 +34,8 @@
   "dependencies": {
     "apidoc": "^0.16.1",
     "babel-core": "^6.5.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-polyfill": "^6.5.0",
     "bcrypt": "^0.8.5",
     "glob": "^7.0.0",
