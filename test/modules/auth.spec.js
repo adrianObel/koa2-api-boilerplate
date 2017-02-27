@@ -1,22 +1,20 @@
 import app from '../../bin/server'
 import supertest from 'supertest'
 import { expect, should } from 'chai'
-import { cleanDb, authUser } from '../utils'
+import { cleanDb } from '../utils'
+import { createUser, getAuthToken } from '../fixtures/users'
 
 should()
 const request = supertest.agent(app.listen())
 const context = {}
 
 describe('Auth', () => {
-  before((done) => {
-    cleanDb()
-    authUser(request, (err, { user, token }) => {
-      if (err) { return done(err) }
+  before(async () => {
+    await cleanDb()
 
-      context.user = user
-      context.token = token
-      done()
-    })
+    context.credentials = { username: 'foo', password: 'foopass' }
+    context.user = await createUser(context.credentials)
+    context.token = await getAuthToken(request, context.credentials)
   })
 
   describe('POST /auth', () => {
@@ -24,7 +22,7 @@ describe('Auth', () => {
       request
         .post('/auth')
         .set('Accept', 'application/json')
-        .send({ username: 'supercoolname', password: 'wrongpassword' })
+        .send({ username: 'notusername', password: 'wrongpassword' })
         .expect(401, done)
     })
 
@@ -32,16 +30,13 @@ describe('Auth', () => {
       request
         .post('/auth')
         .set('Accept', 'application/json')
-        .send({ username: 'test', password: 'pass' })
+        .send(context.credentials)
         .expect(200, (err, res) => {
           if (err) { return done(err) }
 
           res.body.user.should.have.property('username')
-          res.body.user.username.should.equal('test')
+          res.body.user.username.should.equal(context.credentials.username)
           expect(res.body.user.password).to.not.exist
-
-          context.user = res.body.user
-          context.token = res.body.token
 
           done()
         })
