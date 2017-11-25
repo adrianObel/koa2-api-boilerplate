@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  api-server:
+  api:
     build:
       context: ..
       dockerfile: docker/Dockerfile
@@ -16,8 +16,10 @@ services:
       - ../:/opt/app/
       - /opt/app/node_modules
 
-    depends_on:
-      - mongodb
+    links:
+      - postgres
 
-  mongodb:
-    image: 'mongo:latest'
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"

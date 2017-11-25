@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  api-server:
+  api:
     environment:
       - NODE_ENV=test
       - JWT_TOKEN_SECRET=secret-jwt-token

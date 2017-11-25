@@ -1,5 +1,5 @@
 ## Base docker image
-FROM node:7.6-slim
+FROM node:9.2-slim
 
 ## Make directory for app
 RUN mkdir -p /opt/app/
@@ -9,6 +9,10 @@ WORKDIR /opt/app
 
 ## This will use the cache if package.json hasn't been changed
 ADD package.json /tmp/package.json
+ADD package-lock.json /tmp/package-lock.json
+
+# Adds database init to entrypoint to create dev and test
+ADD docker/init.sql /docker-entrypoint-initdb.d/
 
 ## Add build dependencies so we can build our module with node-gyp, and assume "yes" to any questions
 ## Then run npm install from the /tmp directory
