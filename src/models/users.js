@@ -1,8 +1,14 @@
-import bookshelf from 'db'
+import { Model } from 'db'
+import Joi from 'joi'
 
-const User = bookshelf.Model.extend({
+const User = Model.extend({
   tableName: 'users',
-  hasTimestamps: true,
+
+  validate: {
+    name: Joi.string(),
+    password: Joi.string(),
+    email: Joi.string().email()
+  },
 
   // stripped from query
   hidden: ['password']
