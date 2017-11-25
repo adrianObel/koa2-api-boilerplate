@@ -1,26 +1,22 @@
 import User from 'models/users'
 
-export async function createUser (ctx) {
+export async function createUser (ctx, next) {
   const user = new User(ctx.request.body.user)
+
   try {
     await user.save()
   } catch (err) {
     ctx.throw(422, err.message)
   }
 
-  const token = user.generateToken()
-  const response = user.toJSON()
+  ctx.state.user = user
 
-  delete response.password
-
-  ctx.body = {
-    user: response,
-    token
-  }
+  return next()
 }
 
 export async function getUsers (ctx, next) {
-  const users = await User.find({}, '-password')
+  const users = await User.findAll()
+
   ctx.state.users = users
 
   return next()
@@ -28,42 +24,30 @@ export async function getUsers (ctx, next) {
 
 export async function getUser (ctx, next) {
   try {
-    const user = await User.findById(ctx.params.id, '-password')
-    if (!user) {
-      ctx.throw(404)
-    }
-
-    ctx.state.user = user
+    ctx.state.user = await User.findById(ctx.params.id)
   } catch (err) {
-    if (err === 404 || err.name === 'CastError') {
-      ctx.throw(404)
-    }
-
-    ctx.throw(500)
+    return ctx.throw(404, 'User not found')
   }
 
   return next()
 }
 
-export async function updateUser (ctx) {
-  const user = ctx.state.user
+export async function updateUser (ctx, next) {
+  const { user } = ctx.state
 
-  Object.assign(user, ctx.request.body.user)
+  Object.keys(ctx.request.body.user).forEach(attr => {
+    user.set(attr, ctx.request.body.user[attr])
+  })
 
-  await user.save()
+  ctx.state.user = await user.save()
 
-  ctx.body = {
-    user
-  }
+  return next()
 }
 
-export async function deleteUser (ctx) {
-  const user = ctx.state.user
+export async function deleteUser (ctx, next) {
+  const { user } = ctx.state
 
-  await user.remove()
+  ctx.state.user = await user.destroy()
 
-  ctx.status = 200
-  ctx.body = {
-    success: true
-  }
+  return next()
 }
