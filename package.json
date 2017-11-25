@@ -4,10 +4,11 @@
   "description": "Koa2 boilerplate covering essentials for APIs",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "npm run migrate && node index.js",
     "dev": "./node_modules/.bin/nodemon index.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha test/**/*.spec.js --compilers js:babel-register --require babel-polyfill",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/**/*.js",
+    "migrate": "knex migrate:latest"
   },
   "keywords": [],
   "author": "Adrian Obelmejias <adrian@obel.me>",

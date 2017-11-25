@@ -5,4 +5,16 @@ services:
     environment:
       - NODE_ENV=development
       - JWT_TOKEN_SECRET=secret-jwt-token
-      - DATABASE_URL=mongodb://mongodb:27017/koa2-boilerplate-dev
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=koa-boilerplate
+      - POSTGRES_PORT=5432
+
+  postgres:
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=koa-boilerplate
+      - POSTGRES_PORT=5432

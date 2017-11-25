@@ -17,3 +17,8 @@ start:
 .PHONY: build
 build:
 	$(MAKE) exec="build" container
+
+.PHONY: migrate
+migrate:
+	$(MAKE) exec="run api npm run migrate" container
+

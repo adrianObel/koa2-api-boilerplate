@@ -1,35 +1,38 @@
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import koaLogger from 'koa-logger'
-import mongoose from 'mongoose'
-import passport from 'koa-passport'
-import mount from 'koa-mount'
-import serve from 'koa-static'
+import koaError from 'koa-error'
+// import mongoose from 'mongoose'
+// import passport from 'koa-passport'
+// import mount from 'koa-mount'
+// import serve from 'koa-static'
 
-import config from '../config'
-import logger from '../lib/logger'
-import { errorMiddleware } from '../src/utils/errors'
+import pkg from 'pkg'
+import config from 'config'
+import logger from 'logger'
+import router from 'modules'
+
+// initialize database connection
+import 'db'
 
 const app = new Koa()
-app.keys = [config.session]
+// app.keys = [config.session]
 
-mongoose.Promise = global.Promise
-mongoose.connect(config.database)
+// mongoose.Promise = global.Promise
+// mongoose.connect(config.database)
 
 app.use(koaLogger())
 app.use(bodyParser())
-app.use(errorMiddleware())
+app.use(koaError())
 
-app.use(mount('/docs', serve(`${process.cwd()}/docs`)))
+// require('../lib/passport')
+// app.use(passport.initialize())
 
-require('../lib/passport')
-app.use(passport.initialize())
-
-const modules = require('../src/modules')
-modules(app)
+router(app)
 
 app.listen(config.port, () => {
-  logger.info(`Server started on ${config.port}`)
+  console.log(`${pkg.name}: ${config.env}`)
+  console.log(`Running on http://127.0.0.1:${config.port}`)
 })
 
 export default app
