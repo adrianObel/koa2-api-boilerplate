@@ -1,11 +1,18 @@
 {
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "node": "current"
+      }
+    }]
+  ],
   "plugins":  [
-    "transform-es2015-modules-commonjs",
     "transform-object-rest-spread",
     ["module-resolver", {
       "root": ["./src", "./lib"],
       "alias": {
-        "config": "./config"
+        "config": "./config",
+        "pkg": "./package.json"
       }
     }]
   ]
