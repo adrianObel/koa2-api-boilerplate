@@ -9,7 +9,6 @@ import koaError from 'koa-error'
 
 import pkg from 'pkg'
 import config from 'config'
-import logger from 'logger'
 import router from 'modules'
 
 // initialize database connection
