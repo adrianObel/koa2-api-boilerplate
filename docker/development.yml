@@ -11,7 +11,7 @@ services:
       - POSTGRES_DB=koa-boilerplate
       - POSTGRES_PORT=5432
 
-    command: bash -c "npm run dev"
+    command: bash -c "npm run migrate && npm run dev"
 
 
   postgres:
