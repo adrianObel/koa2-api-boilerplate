@@ -4,6 +4,7 @@ exports.up = function (knex, Promise) {
     table.increments('id').primary()
     table.string('name')
     table.string('email').unique()
+    table.boolean('admin').defaultTo(false)
     table.string('password')
     table.timestamps()
   })

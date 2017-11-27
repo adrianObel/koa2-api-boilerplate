@@ -22,7 +22,8 @@ export default [
           }).required()
         })
       }),
-      user.createUser
+      user.createUser,
+      fromStateToBody(['user'])
     ]
   },
   {
