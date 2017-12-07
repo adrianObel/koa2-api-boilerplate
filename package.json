@@ -27,7 +27,7 @@
     "bookshelf-modelbase": "^2.10.4",
     "glob": "^7.1.2",
     "joi": "^13.0.2",
-    "knex": "^0.13.0",
+    "knex": "^0.14.2",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
     "koa-context-validator": "^0.4.1",
@@ -54,6 +54,8 @@
     "supertest": "^3.0.0"
   },
   "jest": {
-    "modulePaths": ["<rootDir>/test"]
+    "modulePaths": [
+      "<rootDir>/test"
+    ]
   }
 }
