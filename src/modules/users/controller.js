@@ -1,4 +1,5 @@
 import User from 'models/user'
+import db from 'db'
 
 export async function createUser (ctx, next) {
   const user = new User(ctx.request.body.user)
@@ -24,7 +25,11 @@ export async function getUser (ctx, next) {
   try {
     ctx.state.user = await User.findById(ctx.params.userId)
   } catch (err) {
-    return ctx.throw(404, 'User not found')
+    if (err instanceof db.Model.NotFoundError) {
+      return ctx.throw(404, 'User not found')
+    }
+
+    return ctx.throw(err)
   }
 
   return next()
