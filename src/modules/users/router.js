@@ -37,7 +37,7 @@ export default [
   },
   {
     method: 'GET',
-    route: '/:id',
+    route: '/:userId',
     handlers: [
       // validateSession,
       user.getUser,
@@ -46,7 +46,7 @@ export default [
   },
   {
     method: 'PATCH',
-    route: '/:id',
+    route: '/:userId',
     handlers: [
       // validateSession,
       user.getUser,
@@ -56,7 +56,7 @@ export default [
   },
   {
     method: 'DELETE',
-    route: '/:id',
+    route: '/:userId',
     handlers: [
       // validateSession,
       user.getUser,

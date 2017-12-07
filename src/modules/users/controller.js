@@ -22,7 +22,7 @@ export async function getUsers (ctx, next) {
 
 export async function getUser (ctx, next) {
   try {
-    ctx.state.user = await User.findById(ctx.params.id)
+    ctx.state.user = await User.findById(ctx.params.userId)
   } catch (err) {
     return ctx.throw(404, 'User not found')
   }
