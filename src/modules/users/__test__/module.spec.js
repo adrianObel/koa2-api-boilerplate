@@ -2,17 +2,20 @@ import app from 'server'
 import supertest from 'supertest'
 import faker from 'faker'
 import knexCleaner from 'knex-cleaner'
+import * as userFixtures from 'fixtures/users'
 import db from 'db'
 
 const request = supertest.agent(app.listen())
+const fixtures = {}
 
 describe('(Module) users', () => {
-  beforeEach(() => {
-    return knexCleaner.clean(db.knex)
+  beforeEach(async () => {
+    await knexCleaner.clean(db.knex)
+
+    fixtures.user = await userFixtures.createUser()
   })
 
   describe('POST /users', async () => {
-
     it('should sign up', async () => {
       const data = {
         user: {
@@ -46,6 +49,7 @@ describe('(Module) users', () => {
       const { users } = res.body
 
       expect(users).toBeTruthy()
+      expect(users.length).toBe(1)
     })
   })
 })
