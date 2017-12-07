@@ -53,5 +53,7 @@
     "nodemon": "^1.12.1",
     "supertest": "^3.0.0"
   },
-  "jest": {}
+  "jest": {
+    "modulePaths": ["<rootDir>/test"]
+  }
 }
