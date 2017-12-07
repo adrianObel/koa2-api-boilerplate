@@ -1,4 +1,4 @@
-import app from '../../../../bin/server'
+import app from 'server'
 import supertest from 'supertest'
 import faker from 'faker'
 import knexCleaner from 'knex-cleaner'
@@ -46,7 +46,6 @@ describe('(Module) users', () => {
       const { users } = res.body
 
       expect(users).toBeTruthy()
-      console.log(users)
     })
   })
 })

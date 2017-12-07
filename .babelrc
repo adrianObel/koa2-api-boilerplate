@@ -12,7 +12,8 @@
       "root": ["./src", "./lib"],
       "alias": {
         "config": "./config",
-        "pkg": "./package.json"
+        "pkg": "./package.json",
+        "server": "./bin/server.js"
       }
     }]
   ]
