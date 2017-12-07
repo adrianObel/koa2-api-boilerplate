@@ -2,7 +2,6 @@ import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import koaLogger from 'koa-logger'
 import koaError from 'koa-error'
-// import mongoose from 'mongoose'
 // import passport from 'koa-passport'
 // import mount from 'koa-mount'
 // import serve from 'koa-static'
@@ -17,10 +16,12 @@ import 'db'
 const app = new Koa()
 // app.keys = [config.session]
 
-// mongoose.Promise = global.Promise
-// mongoose.connect(config.database)
 
-app.use(koaLogger())
+// disable logger for tests
+if (config.env !== 'test') {
+  app.use(koaLogger())
+}
+
 app.use(bodyParser())
 app.use(koaError())
 
