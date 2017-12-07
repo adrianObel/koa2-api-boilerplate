@@ -11,5 +11,16 @@ module.exports = {
     migrations: {
       tableName: 'knex_migrations'
     }
+  },
+  test: {
+    client: 'postgresql',
+    connection: config.database.postgres,
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    }
   }
 }
