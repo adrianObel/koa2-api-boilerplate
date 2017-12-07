@@ -34,7 +34,7 @@ describe('(Router) users', () => {
     const route = router[3]
 
     expect(route.route).toBe('/:userId')
-    expect(route.handlers.length).toBe(3)
+    expect(route.handlers.length).toBe(4)
     expect(route.handlers).toContain(user.getUser)
     expect(route.handlers).toContain(user.updateUser)
   })

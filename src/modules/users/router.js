@@ -49,6 +49,11 @@ export default [
     route: '/:userId',
     handlers: [
       // validateSession,
+      validator({
+        body: object({
+          user: object().required()
+        })
+      }),
       user.getUser,
       user.updateUser,
       fromStateToBody(['user'])
