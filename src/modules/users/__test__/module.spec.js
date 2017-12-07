@@ -21,10 +21,11 @@ describe('(Module) users', () => {
         .send(data)
         .expect(200)
 
-      expect(res.body.user).toBeTruthy()
-      // res.body.user.should.have.property('username')
-      // res.body.user.username.should.equal(userData.user.username)
-      // expect(res.body.user.password).to.not.exist
+      const { user } = res.body
+
+      expect(user).toBeTruthy()
+      expect(user.name).toBe(data.user.name)
+      expect(user.email).toBe(data.user.email)
     })
   })
 })
