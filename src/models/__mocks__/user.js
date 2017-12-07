@@ -1,4 +1,4 @@
-const User = jest.genMockFromModule('models/users').default
+const User = jest.genMockFromModule('models/user').default
 
 User.mockImplementation(function (attrs) {
   this.__attrs = attrs
