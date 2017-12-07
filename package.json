@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run migrate && node index.js",
     "dev": "./node_modules/.bin/nodemon index.js",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha test/**/*.spec.js --compilers js:babel-register --require babel-polyfill",
+    "test": "NODE_ENV=test ./node_modules/.bin/jest",
     "lint": "./node_modules/.bin/eslint --fix .",
     "migrate": "knex migrate:latest"
   },
@@ -38,12 +38,16 @@
     "winston": "^3.0.0-rc1"
   },
   "devDependencies": {
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^21.2.0",
     "eslint": "^4.11.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
+    "jest": "^21.2.1",
     "nodemon": "^1.12.1"
-  }
+  },
+  "jest": {}
 }
