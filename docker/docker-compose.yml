@@ -16,10 +16,10 @@ services:
       - ../:/opt/app/
       - /opt/app/node_modules
 
-    links:
-      - postgres
+    # links:
+    #   - postgres
 
-  postgres:
-    image: postgres
-    ports:
-      - "5432:5432"
+  # postgres:
+  #   image: postgres
+  #   ports:
+  #     - "5432:5432"

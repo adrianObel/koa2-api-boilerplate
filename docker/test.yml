@@ -5,6 +5,25 @@ services:
     environment:
       - NODE_ENV=test
       - JWT_TOKEN_SECRET=secret-jwt-token
-      - DATABASE_URL=mongodb://mongodb:27017/koa2-boilerplate-test
+      - POSTGRES_HOST=postgres-test
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=koa-boilerplate-test
+      - POSTGRES_PORT=5432
 
-    command: bash -c "npm test"
+    links:
+      - postgres-test
+
+    command: bash -c "npm run migrate && npm run test -- --forceExit"
+
+  postgres-test:
+    image: postgres
+    ports:
+      - "5432:5432"
+
+    environment:
+      - POSTGRES_HOST=postgres-test
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=koa-boilerplate-test
+      - POSTGRES_PORT=5432
