@@ -17,6 +17,10 @@ services:
     command: bash -c "npm run migrate && npm run dev"
 
   postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+
     environment:
       - POSTGRES_HOST=postgres
       - POSTGRES_USER=postgres
