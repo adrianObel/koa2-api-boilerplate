@@ -4,12 +4,10 @@ export async function createUser (ctx, next) {
   const user = new User(ctx.request.body.user)
 
   try {
-    await user.save()
+    ctx.state.user = await user.save()
   } catch (err) {
     ctx.throw(422, err.message)
   }
-
-  ctx.state.user = user
 
   return next()
 }
