@@ -14,7 +14,6 @@ import 'db'
 import 'passport'
 
 const app = new Koa()
-app.keys = [config.session]
 
 // disable logger for tests
 if (config.env !== 'test') {
