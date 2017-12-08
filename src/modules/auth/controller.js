@@ -1,20 +1,20 @@
 import passport from 'koa-passport'
+import db from 'db'
 
-export async function authUser (ctx, next) {
-  return passport.authenticate('local', (user) => {
+export async function authEmail (ctx, next) {
+  return passport.authenticate('local', (err, user) => {
+    if (err instanceof db.Model.NotFoundError) {
+      return ctx.throw(401, 'Incorrect email or password')
+    } else if (err) {
+      return ctx.throw(err)
+    }
+
     if (!user) {
-      ctx.throw(401)
+      return ctx.throw(401, 'Incorrect email or password')
     }
 
-    const token = user.generateToken()
+    ctx.state.user = user
 
-    const response = user.toJSON()
-
-    delete response.password
-
-    ctx.body = {
-      token,
-      user: response
-    }
+    return next()
   })(ctx, next)
 }
