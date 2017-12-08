@@ -15,9 +15,11 @@ const User = Model.extend({
   hidden: ['password'],
 
   initialize () {
-    this.on('saving', async () => {
-      const hash = await bcrypt.hash(this.get('password'), 13)
-      this.set('password', hash)
+    this.on('saving', async (model, attrs) => {
+      if (model.hasChanged('password')) {
+        const hash = await bcrypt.hash(this.get('password'), 13)
+        this.set('password', hash)
+      }
     })
   },
 
