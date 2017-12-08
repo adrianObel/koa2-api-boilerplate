@@ -30,9 +30,11 @@ app.use(koaError())
 
 router(app)
 
-app.listen(config.port, () => {
-  console.log(`${pkg.name}: ${config.env}`)
-  console.log(`Running on http://127.0.0.1:${config.port}`)
-})
+if (config.env !== 'test') {
+  app.listen(config.port, () => {
+    console.log(`${pkg.name}: ${config.env}`)
+    console.log(`Running on http://127.0.0.1:${config.port}`)
+  })
+}
 
 export default app
