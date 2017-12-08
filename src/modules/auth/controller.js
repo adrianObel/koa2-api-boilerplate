@@ -18,3 +18,9 @@ export async function authEmail (ctx, next) {
     return next()
   })(ctx, next)
 }
+
+export async function generateToken (ctx, next) {
+  ctx.state.token = await ctx.state.user.generateToken()
+
+  return next()
+}

@@ -1,5 +1,7 @@
 import bcrypt from 'bcryptjs'
 import Joi from 'joi'
+import jwt from 'jsonwebtoken'
+import config from 'config'
 import { Model } from 'db'
 
 const User = Model.extend({
@@ -25,6 +27,17 @@ const User = Model.extend({
 
   verifyPassword (password) {
     return bcrypt.compare(password, this.get('password'))
+  },
+
+  generateToken () {
+    const payload = {
+      id: this.get('id'),
+      admin: this.get('admin')
+    }
+
+    return jwt.sign(payload, config.token, {
+      expiresIn: '10h'
+    })
   }
 })
 

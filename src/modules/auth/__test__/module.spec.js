@@ -1,10 +1,16 @@
 import app from 'server'
 import supertest from 'supertest'
+import knexCleaner from 'knex-cleaner'
+import db from 'db'
 import { createUser } from 'fixtures/users'
 
 const request = supertest.agent(app.listen())
 
 describe('(Module) auth', () => {
+  beforeEach(() => {
+    return knexCleaner.clean(db.knex)
+  })
+
   describe('POST /auth', () => {
     it('should return a 401 is credentials are incorrect', async () => {
       const data = {
@@ -33,9 +39,11 @@ describe('(Module) auth', () => {
         .send(data)
         .expect(200)
 
-      const { user } = res.body
+      const { user, token } = res.body
 
       expect(user).toBeTruthy()
+      expect(token).toBeTruthy()
+
       expect(user.email).toBe(data.email)
       expect(user.password).toBe(undefined)
     })

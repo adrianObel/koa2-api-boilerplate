@@ -16,7 +16,8 @@ export default [
         })
       }),
       auth.authEmail,
-      fromStateToBody(['user'])
+      auth.generateToken,
+      fromStateToBody(['user', 'token'])
     ]
   }
 ]

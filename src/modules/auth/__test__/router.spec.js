@@ -10,7 +10,8 @@ describe('(Router) auth', () => {
     const route = router[0]
 
     expect(route.route).toBe('/')
-    expect(route.handlers.length).toBe(3)
+    expect(route.handlers.length).toBe(4)
     expect(route.handlers).toContain(auth.authEmail)
+    expect(route.handlers).toContain(auth.generateToken)
   })
 })

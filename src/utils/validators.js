@@ -1,9 +1,14 @@
 import { verify } from 'jsonwebtoken'
-import config from 'config'
 import User from 'models/users'
+import config from 'config'
+import db from 'db'
 import { getToken } from 'utils/auth'
 
-export async function validateSession (ctx, next) {
+/**
+ * Validate user session.
+ * Attaches user object to ctx.state.session.user
+ */
+export async function authorize (ctx, next) {
   const token = getToken(ctx)
 
   if (!token) {
@@ -17,9 +22,17 @@ export async function validateSession (ctx, next) {
     ctx.throw(401)
   }
 
-  ctx.state.user = await User.findById(decoded.id, '-password')
-  if (!ctx.state.user) {
-    ctx.throw(401)
+  try {
+    ctx.state.session = {
+      ...ctx.state.session,
+      user: await User.findById(decoded.id)
+    }
+  } catch (err) {
+    if (err instanceof db.Model.NotFoundError) {
+      return ctx.throw(401)
+    } else {
+      return ctx.throw(err)
+    }
   }
 
   return next()
