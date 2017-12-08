@@ -29,6 +29,7 @@ router(app)
 if (config.env !== 'test') {
   app.listen(config.port, () => {
     console.log(`${pkg.name}: ${config.env}`)
+    console.log(`Version: ${pkg.version}`)
     console.log(`Running on http://127.0.0.1:${config.port}`)
   })
 }
