@@ -2,9 +2,7 @@ import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import koaLogger from 'koa-logger'
 import koaError from 'koa-error'
-// import passport from 'koa-passport'
-// import mount from 'koa-mount'
-// import serve from 'koa-static'
+import passport from 'koa-passport'
 
 import pkg from 'pkg'
 import config from 'config'
@@ -12,10 +10,11 @@ import router from 'modules'
 
 // initialize database connection
 import 'db'
+// initialize auth strategies
+import 'passport'
 
 const app = new Koa()
-// app.keys = [config.session]
-
+app.keys = [config.session]
 
 // disable logger for tests
 if (config.env !== 'test') {
@@ -24,9 +23,7 @@ if (config.env !== 'test') {
 
 app.use(bodyParser())
 app.use(koaError())
-
-// require('../lib/passport')
-// app.use(passport.initialize())
+app.use(passport.initialize())
 
 router(app)
 
