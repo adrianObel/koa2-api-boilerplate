@@ -1,7 +1,11 @@
-import app from '../bin/server'
-import supertest from 'supertest'
-import { expect, should } from 'chai'
-import { cleanDb, authUser } from './utils'
+const app = require('../bin/server')
+const supertest = require('supertest')
+//const { expect, should } = require('chai')
+const expect = require('chai').expect;
+const should = require('chai').should;
+//const { cleanDb, authUser } = require('./utils')
+const cleanDb = require('./utils').cleanDb
+const authUser = require('./utils').authUser
 
 should()
 const request = supertest.agent(app.listen())

@@ -1,7 +1,11 @@
-import app from '../bin/server'
-import supertest from 'supertest'
-import { expect, should } from 'chai'
-import { cleanDb } from './utils'
+const app = require('../bin/server')
+const supertest = require('supertest')
+// const { expect, should } = require('chai')
+const expect = require('chai').expect
+const should = require('chai').should
+// const { cleanDb, authUser } = require('./utils')
+const cleanDb = require('./utils').cleanDb
+//const authUser = require('./utils').authUser
 
 should()
 const request = supertest.agent(app.listen())
@@ -36,6 +40,7 @@ describe('Users', () => {
 
           context.user = res.body.user
           context.token = res.body.token
+          // console.log(`token: ${res.body.token}`)
 
           done()
         })
@@ -137,6 +142,8 @@ describe('Users', () => {
         })
         .expect(200, (err, res) => {
           if (err) { return done(err) }
+
+          // console.log(`res: ${JSON.stringify(res, null, 2)}`)
 
           res.body.should.have.property('user')
 
