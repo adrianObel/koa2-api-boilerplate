@@ -1,12 +1,12 @@
 {
-  "name": "koa2-api-boilerplate",
-  "version": "2.2.0",
-  "description": "Koa2 boilerplate covering essentials for APIs",
+  "name": "babel-free-koa2-api-boilerplate",
+  "version": "3.0.0",
+  "description": "Koa2 boilerplate covering essentials for APIs, babel removed as a dependency",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "./node_modules/.bin/nodemon index.js",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-register --require babel-polyfill",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers",
     "lint": "eslint src/**/*.js",
     "docs": "./node_modules/.bin/apidoc -i src/ -o docs"
   },
@@ -21,22 +21,18 @@
     "passportjs",
     "apidoc"
   ],
-  "author": "Adrian Obelmejias <adrian@obel.me>",
+  "author": "Chris Troutner <chris.troutner@gmail.com>",
   "license": "MIT",
   "apidoc": {
-    "title": "koa2-api-boilerplate",
+    "title": "babel-free-koa2-api-boilerplate",
     "url": "localhost:5000"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adrianObel/koa2-api-boilerplate"
+    "url": "https://github.com/christroutner/babel-free-koa2-api-boilerplate"
   },
   "dependencies": {
     "apidoc": "^0.16.1",
-    "babel-core": "^6.5.1",
-    "babel-polyfill": "^6.5.0",
-    "babel-preset-es2015-node5": "^1.2.0",
-    "babel-preset-stage-0": "^6.5.0",
     "bcrypt": "^0.8.5",
     "glob": "^7.0.0",
     "jsonwebtoken": "^7.1.9",
@@ -53,8 +49,6 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^6.0.2",
-    "babel-register": "^6.5.1",
     "chai": "^3.5.0",
     "eslint": "^3.4.0",
     "eslint-config-standard": "^6.0.0",
