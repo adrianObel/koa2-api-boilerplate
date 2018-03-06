@@ -1,7 +1,7 @@
-import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
-import config from '../../config'
-import jwt from 'jsonwebtoken'
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
+const config = require('../../config')
+const jwt = require('jsonwebtoken')
 
 const User = new mongoose.Schema({
   type: { type: String, default: 'User' },
@@ -50,7 +50,11 @@ User.methods.validatePassword = function validatePassword (password) {
 User.methods.generateToken = function generateToken () {
   const user = this
 
-  return jwt.sign({ id: user.id }, config.token)
+  const token = jwt.sign({ id: user.id }, config.token)
+  //console.log(`config.token: ${config.token}`)
+  //console.log(`generated token: ${token}`)
+  return token
 }
 
-export default mongoose.model('user', User)
+// export default mongoose.model('user', User)
+module.exports = mongoose.model('user', User)

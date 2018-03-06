@@ -1,6 +1,6 @@
-import common from './env/common'
+const common = require('./env/common')
 
 const env = process.env.NODE_ENV || 'development'
-const config = require(`./env/${env}`).default
+const config = require(`./env/${env}`)
 
-export default Object.assign({}, common, config)
+module.exports = Object.assign({}, common, config)

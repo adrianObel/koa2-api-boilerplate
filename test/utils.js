@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
-export function cleanDb () {
+function cleanDb () {
   for (const collection in mongoose.connection.collections) {
     if (mongoose.connection.collections.hasOwnProperty(collection)) {
       mongoose.connection.collections[collection].remove()
@@ -8,7 +8,7 @@ export function cleanDb () {
   }
 }
 
-export function authUser (agent, callback) {
+function authUser (agent, callback) {
   agent
     .post('/users')
     .set('Accept', 'application/json')
@@ -21,4 +21,9 @@ export function authUser (agent, callback) {
         token: res.body.token
       })
     })
+}
+
+module.exports = {
+  cleanDb,
+  authUser
 }

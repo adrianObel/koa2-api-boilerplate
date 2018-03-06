@@ -1,4 +1,4 @@
-import passport from 'koa-passport'
+const passport = require('koa-passport')
 
 /**
  * @apiDefine TokenError
@@ -50,7 +50,7 @@ import passport from 'koa-passport'
  *     }
  */
 
-export async function authUser (ctx, next) {
+async function authUser (ctx, next) {
   return passport.authenticate('local', (user) => {
     if (!user) {
       ctx.throw(401)
@@ -68,3 +68,5 @@ export async function authUser (ctx, next) {
     }
   })(ctx, next)
 }
+
+module.exports.authUser = authUser

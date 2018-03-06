@@ -1,7 +1,9 @@
-#koa2-api-boilerplate
+# babel-free-koa2-api-boilerplate
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
 Boilerplate for building APIs with [koa2](https://github.com/koajs/koa/tree/v2.x) and mongodb.
+Modified to remove babel as a dependency. This repository is now natively compatible
+with node v8.9 or higher.
 
 This project covers basic necessities of most APIs.
 * Authentication (passport & jwt)
@@ -31,7 +33,6 @@ git clone https://github.com/adrianObel/koa2-api-boilerplate.git
 * [Nodemon](http://nodemon.io/)
 * [Mocha](https://mochajs.org/)
 * [apidoc](http://apidocjs.com/)
-* [Babel](https://github.com/babel/babel)
 * [ESLint](http://eslint.org/)
 
 ##Structure
