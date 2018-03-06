@@ -5,6 +5,9 @@ Boilerplate for building APIs with [koa2](https://github.com/koajs/koa/tree/v2.x
 Modified to remove babel as a dependency. This repository is now natively compatible
 with node v8.9 or higher.
 
+With the exception of removing babel as a dependency, this repository is identical
+to Adrian Obelmejias' [koa-api-boilerplate repository](https://github.com/adrianObel/koa2-api-boilerplate).
+
 This project covers basic necessities of most APIs.
 * Authentication (passport & jwt)
 * Database (mongoose)
