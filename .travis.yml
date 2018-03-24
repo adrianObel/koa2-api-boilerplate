@@ -1,0 +1,17 @@
+# This is a node.js v8+ JavaScript project
+language: node_js
+node_js:
+  - "8"
+
+# Build on Ubuntu Trusty (14.04)
+# https://docs.travis-ci.com/user/reference/trusty/#javascript-and-nodejs-images
+dist: trusty
+sudo: required
+
+# Use Docker
+services:
+  - docker
+
+before_install:
+  - ./install-mongo
+  #- npm install -g mocha
