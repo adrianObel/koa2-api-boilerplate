@@ -11,38 +11,43 @@ const serve = require('koa-static')
 const config = require('../config')
 const errorMiddleware = require('../src/middleware')
 
-// Create a Koa instance.
-const app = new Koa()
-app.keys = [config.session]
+async function startServer() {
 
-// Connect to the Mongo Database.
-mongoose.Promise = global.Promise
-mongoose.connect(config.database)
+  // Create a Koa instance.
+  const app = new Koa()
+  app.keys = [config.session]
 
-// MIDDLEWARE START
+  // Connect to the Mongo Database.
+  mongoose.Promise = global.Promise
+  mongoose.connect(config.database)
 
-app.use(convert(logger()))
-app.use(bodyParser())
-app.use(session())
-app.use(errorMiddleware())
+  // MIDDLEWARE START
 
-// Used to generate the docs.
-app.use(convert(mount('/docs', serve(`${process.cwd()}/docs`))))
+  app.use(convert(logger()))
+  app.use(bodyParser())
+  app.use(session())
+  app.use(errorMiddleware())
 
-// User Authentication
-require('../config/passport')
-app.use(passport.initialize())
-app.use(passport.session())
+  // Used to generate the docs.
+  app.use(convert(mount('/docs', serve(`${process.cwd()}/docs`))))
 
-// Custom Middleware Modules
-const modules = require('../src/modules')
-modules(app)
+  // User Authentication
+  require('../config/passport')
+  app.use(passport.initialize())
+  app.use(passport.session())
 
-// MIDDLEWARE END
+  // Custom Middleware Modules
+  const modules = require('../src/modules')
+  modules(app)
 
-app.listen(config.port, () => {
-  console.log(`Server started on ${config.port}`)
-})
+  // MIDDLEWARE END
+
+  app.listen(config.port, () => {
+    console.log(`Server started on ${config.port}`)
+  })
+}
+startServer()
 
 // export default app
-module.exports = app
+//module.exports = app
+module.exports = startServer
