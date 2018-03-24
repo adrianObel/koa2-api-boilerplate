@@ -11,15 +11,14 @@ const serve = require('koa-static')
 const config = require('../config')
 const errorMiddleware = require('../src/middleware')
 
-async function startServer() {
-
+async function startServer () {
   // Create a Koa instance.
   const app = new Koa()
   app.keys = [config.session]
 
   // Connect to the Mongo Database.
   mongoose.Promise = global.Promise
-  mongoose.connect(config.database)
+  await mongoose.connect(config.database)
 
   // MIDDLEWARE START
 
@@ -42,12 +41,18 @@ async function startServer() {
 
   // MIDDLEWARE END
 
-  app.listen(config.port, () => {
-    console.log(`Server started on ${config.port}`)
-  })
+  // app.listen(config.port, () => {
+  //  console.log(`Server started on ${config.port}`)
+  // })
+  await app.listen(config.port)
+  console.log(`Server started on ${config.port}`)
+
+  return app
 }
-startServer()
+// startServer()
 
 // export default app
-//module.exports = app
-module.exports = startServer
+// module.exports = app
+module.exports = {
+  startServer
+}

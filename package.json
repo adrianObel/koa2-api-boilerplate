@@ -46,7 +46,9 @@
     "koa-router": "^7.0.1",
     "koa-static": "^4.0.2",
     "mongoose": "^5.0.8",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",

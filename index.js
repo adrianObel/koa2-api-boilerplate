@@ -1,1 +1,3 @@
-require('./bin/server.js')
+const server = require('./bin/server.js')
+
+server.startServer()
