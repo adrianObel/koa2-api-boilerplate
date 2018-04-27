@@ -7,6 +7,7 @@ const session = require('koa-generic-session')
 const passport = require('koa-passport')
 const mount = require('koa-mount')
 const serve = require('koa-static')
+const cors = require('kcors')
 
 const config = require('../config')
 const errorMiddleware = require('../src/middleware')
@@ -38,6 +39,9 @@ async function startServer () {
   // Custom Middleware Modules
   const modules = require('../src/modules')
   modules(app)
+
+  // Enable CORS for testing
+  //app.use(cors({origin: '*'}))
 
   // MIDDLEWARE END
 

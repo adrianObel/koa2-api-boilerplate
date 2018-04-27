@@ -36,6 +36,7 @@
     "bcrypt": "^0.8.5",
     "glob": "^7.0.0",
     "jsonwebtoken": "^7.1.9",
+    "kcors": "^2.2.1",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
     "koa-convert": "^1.2.0",
