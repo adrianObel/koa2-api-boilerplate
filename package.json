@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "apidoc": "^0.16.1",
-    "bcrypt": "^0.8.5",
+    "bcryptjs": "^2.4.3",
     "glob": "^7.0.0",
     "jsonwebtoken": "^7.1.9",
     "kcors": "^2.2.1",
