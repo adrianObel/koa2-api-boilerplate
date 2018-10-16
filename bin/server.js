@@ -19,7 +19,8 @@ async function startServer () {
 
   // Connect to the Mongo Database.
   mongoose.Promise = global.Promise
-  await mongoose.connect(config.database)
+  await mongoose.connect(config.database, { useNewUrlParser: true })
+  mongoose.set('useCreateIndex', true) // Stop deprecation warning.
 
   // MIDDLEWARE START
 
@@ -41,7 +42,7 @@ async function startServer () {
   modules(app)
 
   // Enable CORS for testing
-  //app.use(cors({origin: '*'}))
+  // app.use(cors({origin: '*'}))
 
   // MIDDLEWARE END
 

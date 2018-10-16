@@ -213,7 +213,7 @@ async function updateUser (ctx) {
 async function deleteUser (ctx) {
   const user = ctx.body.user
 
-  await user.remove()
+  await user.deleteOne()
 
   ctx.status = 200
   ctx.body = {
