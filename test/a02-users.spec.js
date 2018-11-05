@@ -183,55 +183,81 @@ describe('Users', () => {
       assert.equal(users.length, 1)
     })
   })
-/*
+
   describe('GET /users/:id', () => {
-    it('should not fetch user if token is invalid', (done) => {
-      request
-        .get('/users/1')
-        .set({
-          Accept: 'application/json',
-          Authorization: 'Bearer 1'
-        })
-        .expect(401, done)
+    it('should not fetch user if token is invalid', async () => {
+      try {
+        const options = {
+          method: 'GET',
+          uri: `${LOCALHOST}/users/1`,
+          resolveWithFullResponse: true,
+          json: true,
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer 1`
+          }
+        }
+
+        await rp(options)
+        assert.equal(true, false, 'Unexpected behavior')
+      } catch (err) {
+        assert.equal(err.statusCode, 401)
+      }
     })
 
-    it('should throw 404 if user doesn\'t exist', (done) => {
+    it('should throw 404 if user doesn\'t exist', async () => {
       const { token } = context
-      request
-        .get('/users/1')
-        .set({
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`
-        })
-        .expect(404, done)
+
+      try {
+        const options = {
+          method: 'GET',
+          uri: `${LOCALHOST}/users/1`,
+          resolveWithFullResponse: true,
+          json: true,
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        }
+
+        await rp(options)
+        assert.equal(true, false, 'Unexpected behavior')
+      } catch (err) {
+        assert.equal(err.statusCode, 404)
+      }
     })
 
-    it('should fetch user', (done) => {
+    it('should fetch user', async () => {
       const {
         user: { _id },
         token
       } = context
 
-      request
-        .get(`/users/${_id}`)
-        .set({
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`
-        })
-        .expect(200, (err, res) => {
-          if (err) { return done(err) }
+      const options = {
+        method: 'GET',
+        uri: `${LOCALHOST}/users/${_id}`,
+        resolveWithFullResponse: true,
+        json: true,
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      }
 
-          // console.log(`res: ${JSON.stringify(res, null, 2)}`)
+      const result = await rp(options)
+      const user = result.body.user
+      // console.log(`user: ${util.inspect(user)}`)
 
-          res.body.should.have.property('user')
-
-          expect(res.body.user.password).to.not.exist
-
-          done()
-        })
+      assert.hasAnyKeys(user, [
+        'type',
+        '_id',
+        'username'
+      ])
+      assert.equal(user._id, _id)
+      assert.notProperty(user, 'password', 'Password property should not be returned')
     })
   })
-
+/*
   describe('PUT /users/:id', () => {
     it('should not update user if token is invalid', (done) => {
       request
