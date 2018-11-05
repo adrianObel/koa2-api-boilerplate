@@ -333,44 +333,71 @@ describe('Users', () => {
       assert.equal(user.username, 'updatedcoolname')
     })
   })
-  /*
+
   describe('DELETE /users/:id', () => {
-    it('should not delete user if token is invalid', (done) => {
-      request
-        .delete('/users/1')
-        .set({
-          Accept: 'application/json',
-          Authorization: 'Bearer 1'
-        })
-        .expect(401, done)
+    it('should not delete user if token is invalid', async () => {
+      try {
+        const options = {
+          method: 'DELETE',
+          uri: `${LOCALHOST}/users/1`,
+          resolveWithFullResponse: true,
+          json: true,
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer 1`
+          }
+        }
+
+        await rp(options)
+        assert.equal(true, false, 'Unexpected behavior')
+      } catch (err) {
+        assert.equal(err.statusCode, 401)
+      }
     })
 
-    it('should throw 404 if user doesn\'t exist', (done) => {
+    it('should throw 404 if user doesn\'t exist', async () => {
       const { token } = context
-      request
-        .delete('/users/1')
-        .set({
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`
-        })
-        .expect(404, done)
+
+      try {
+        const options = {
+          method: 'DELETE',
+          uri: `${LOCALHOST}/users/1`,
+          resolveWithFullResponse: true,
+          json: true,
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        }
+
+        await rp(options)
+        assert.equal(true, false, 'Unexpected behavior')
+      } catch (err) {
+        assert.equal(err.statusCode, 404)
+      }
     })
 
-    it('should delete user', (done) => {
+    it('should delete user', async () => {
       const {
         user: { _id },
         token
       } = context
 
-      request
-        .delete(`/users/${_id}`)
-        .set({
+      const options = {
+        method: 'DELETE',
+        uri: `${LOCALHOST}/users/${_id}`,
+        resolveWithFullResponse: true,
+        json: true,
+        headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${token}`
-        })
-        .expect(200, done)
-    })
+        }
+      }
 
+      const result = await rp(options)
+      // console.log(`result: ${util.inspect(result.body)}`)
+
+      assert.equal(result.body.success, true)
+    })
   })
-  */
 })
