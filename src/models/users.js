@@ -51,8 +51,8 @@ User.methods.generateToken = function generateToken () {
   const user = this
 
   const token = jwt.sign({ id: user.id }, config.token)
-  //console.log(`config.token: ${config.token}`)
-  //console.log(`generated token: ${token}`)
+  // console.log(`config.token: ${config.token}`)
+  // console.log(`generated token: ${token}`)
   return token
 }
 
