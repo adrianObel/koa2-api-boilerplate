@@ -56,3 +56,6 @@ sftp-config.json
 
 #Documentation
 docs
+
+nyc_output
+coverage
