@@ -51,7 +51,9 @@ const passport = require('koa-passport')
  */
 
 async function authUser (ctx, next) {
-  return passport.authenticate('local', (user) => {
+  return passport.authenticate('local', (err, user, info, status) => {
+    if (err) throw err
+
     if (!user) {
       ctx.throw(401)
     }
