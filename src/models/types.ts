@@ -1,15 +1,16 @@
-import { Schema } from "mongoose";
+import { Document, Schema } from "mongoose";
 
 export enum RolesType {
     Admin,
     User,
 }
 
-export interface UserType extends Schema {
+export interface UserType extends Document {
+    id?: string
     type: RolesType,
     name: string,
     username: string
-    password: string
+    password?: string
     generateToken: () => string
     validatePassword: (password: string) => Promise<string>
 }

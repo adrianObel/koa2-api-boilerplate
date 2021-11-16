@@ -40,7 +40,7 @@ User.pre("save", function(this: UserType, next: any) {
     .catch((err) => next(err));
 });
 
-User.methods.validatePassword = (password: string) => {
+User.methods.validatePassword = function(this: UserType, password: string) {
   const user = this;
 
   return new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ User.methods.validatePassword = (password: string) => {
   });
 };
 
-User.methods.generateToken = function generateToken() {
+User.methods.generateToken = function(this: UserType) {
   const user = this;
 
   return jwt.sign({ id: user.id }, config.token);

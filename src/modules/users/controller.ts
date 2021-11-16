@@ -1,4 +1,4 @@
-import { Context, Next, Request } from "koa";
+import { Context, Next} from "koa";
 import { UserType } from "../../models/types";
 import User from "../../models/users";
 
