@@ -7,10 +7,10 @@ export enum RolesType {
 
 export interface UserType extends Document {
     id?: string
-    type: RolesType,
-    name: string,
+    type: RolesType
+    name: string
     username: string
-    password?: string
+    password: string
     generateToken: () => string
-    validatePassword: (password: string) => Promise<string>
+    validatePassword: (password: string) => Promise<boolean>
 }

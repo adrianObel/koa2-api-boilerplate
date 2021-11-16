@@ -28,10 +28,7 @@ export default (app: Application) => {
 
         const lastHandler = handlers.pop();
 
-        instance[method.toLowerCase()](
-          route,
-          ...handlers,
-          async function (ctx: BaseContext) {
+        instance[method.toLowerCase()](route, ...handlers, async function (ctx: BaseContext) {
             return await lastHandler(ctx);
           }
         );
