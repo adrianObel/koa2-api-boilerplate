@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import config from "../../config";
+import config from "../config";
 import jwt from "jsonwebtoken";
+import { Next } from "koa";
 
 const User = new mongoose.Schema({
   type: { type: String, default: "User" },
@@ -10,7 +11,7 @@ const User = new mongoose.Schema({
   password: { type: String, required: true },
 });
 
-User.pre("save", function preSave(next) {
+User.pre("save", function preSave(next: Next) {
   const user = this;
 
   if (!user.isModified("password")) {
@@ -39,7 +40,7 @@ User.pre("save", function preSave(next) {
     .catch((err) => next(err));
 });
 
-User.methods.validatePassword = function validatePassword(password) {
+User.methods.validatePassword = (password: string) => {
   const user = this;
 
   return new Promise((resolve, reject) => {
