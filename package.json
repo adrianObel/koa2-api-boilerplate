@@ -1,17 +1,15 @@
 {
-  "name": "koa2-api-boilerplate",
-  "version": "2.2.0",
-  "description": "Koa2 boilerplate covering essentials for APIs",
-  "main": "index.js",
+  "name": "referral_service",
+  "main": "index.ts",
   "scripts": {
-    "start": "node index.js",
-    "dev": "./node_modules/.bin/nodemon index.js",
+    "start": "tsc && node dist/app.js",
+    "dev": "./node_modules/.bin/nodemon index.ts",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-register --require babel-polyfill",
-    "lint": "eslint src/**/*.js",
+    "lint": "eslint src/**/*.ts",
     "docs": "./node_modules/.bin/apidoc -i src/ -o docs"
   },
   "keywords": [
-    "koa2-api-boilerplate",
+    "referral_service",
     "api",
     "koa",
     "koa2",
@@ -24,20 +22,21 @@
   "author": "Adrian Obelmejias <adrian@obel.me>",
   "license": "MIT",
   "apidoc": {
-    "title": "koa2-api-boilerplate",
+    "title": "referral_service",
     "url": "localhost:5000"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/adrianObel/koa2-api-boilerplate"
+    "type": "git"
   },
   "dependencies": {
+    "@babel/preset-typescript": "^7.16.0",
+    "@types/node": "^16.11.7",
     "apidoc": "^0.16.1",
     "babel-core": "^6.5.1",
     "babel-polyfill": "^6.5.0",
     "babel-preset-es2015-node5": "^1.2.0",
     "babel-preset-stage-0": "^6.5.0",
-    "bcrypt": "^0.8.5",
+    "bcrypt": "^5.0.1",
     "glob": "^7.0.0",
     "jsonwebtoken": "^7.1.9",
     "koa": "^2.0.0-alpha.6",
@@ -50,9 +49,12 @@
     "koa-router": "^7.0.1",
     "koa-static": "^2.0.0",
     "mongoose": "^4.4.3",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
   },
   "devDependencies": {
+    "@types/koa": "^2.13.4",
     "babel-eslint": "^6.0.2",
     "babel-register": "^6.5.1",
     "chai": "^3.5.0",
