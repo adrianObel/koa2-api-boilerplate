@@ -1,5 +1,7 @@
 if(process.env.NODE_ENV != "development") {
-    console.log = () => {}
+    console.log = () => {};
+    console.info = () => {};
+    console.error = () => {};
 }
 
-require('./bin')
+require('./bin');
