@@ -1,3 +1,3 @@
 {
-  "presets": ["@babel/typescript", ["@babel/env", { "modules": false }]]
+  "presets": ["@babel/typescript", ["@babel/env", { "modules": true}]]
 }
