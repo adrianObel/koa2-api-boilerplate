@@ -3,7 +3,6 @@ import bodyParser from "koa-bodyparser";
 import convert from "koa-convert";
 import logger from "koa-logger";
 import mongoose from "mongoose";
-import session from "koa-generic-session";
 import passport from "koa-passport";
 import mount from "koa-mount";
 import serve from "koa-static";

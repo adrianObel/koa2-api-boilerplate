@@ -49,7 +49,7 @@
     "koa-passport": "^2.0.1",
     "koa-router": "^7.0.1",
     "koa-static": "^2.0.0",
-    "mongoose": "^4.4.3",
+    "mongoose": "^6.0.13",
     "passport-local": "^1.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"

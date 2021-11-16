@@ -1,4 +1,5 @@
-import { Context, Next } from "koa";
+import { Context, Next, Request } from "koa";
+import { UserType } from "../../models/types";
 import User from "../../models/users";
 
 /**
@@ -181,8 +182,7 @@ export async function getUser(ctx: Context, next: Next) {
  * @apiUse TokenError
  */
 export async function updateUser(ctx: Context) {
-  const user = ctx.body.user;
-
+  const {request: {body: user}} = ctx;
   Object.assign(user, ctx.request.body.user);
 
   await user.save();
@@ -214,7 +214,7 @@ export async function updateUser(ctx: Context) {
  */
 
 export async function deleteUser(ctx: Context) {
-  const user = ctx.body.user;
+  const user = <UserType>ctx.body.user;
 
   await user.remove();
 

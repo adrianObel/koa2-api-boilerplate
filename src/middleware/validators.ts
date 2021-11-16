@@ -1,9 +1,10 @@
 import User from "../models/users";
-import config from "../../config";
 import { getToken } from "../utils/auth";
 import { verify } from "jsonwebtoken";
+import { Context, Next } from "koa";
+import config from "../config";
 
-export async function ensureUser(ctx, next) {
+export async function ensureUser(ctx: Context, next: Next) {
   const token = getToken(ctx);
 
   if (!token) {
@@ -13,7 +14,7 @@ export async function ensureUser(ctx, next) {
   let decoded = null;
   try {
     decoded = verify(token, config.token);
-  } catch (err) {
+  } catch (err: any) {
     ctx.throw(401);
   }
 

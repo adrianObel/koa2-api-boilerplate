@@ -1,4 +1,7 @@
+import { Next } from "koa";
 import passport from "koa-passport";
+import { Context } from "koa";
+import { UserType } from "../../models/types";
 
 /**
  * @apiDefine TokenError
@@ -50,8 +53,8 @@ import passport from "koa-passport";
  *     }
  */
 
-export async function authUser(ctx, next) {
-  return passport.authenticate("local", (user) => {
+export async function authUser(ctx: Context, next: Next) {
+  return passport.authenticate("local", (user: UserType) => {
     if (!user) {
       ctx.throw(401);
     }
