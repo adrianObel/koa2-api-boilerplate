@@ -11,12 +11,12 @@ export interface Config {
 
 
 export default (app: Application) => {
-  glob(`${__dirname}/*`, { ignore: "**/index.js" }, (err, matches) => {
+  glob(`${__dirname}/*`, { ignore: "**/index.js" }, (err: any, matches: Array<string>) => {
     if (err) {
       throw err;
     }
 
-    matches.forEach((mod) => {
+    matches.forEach((mod: string) => {
       const router = require(`${mod}/router`);
 
       const routes = router.default;
@@ -24,7 +24,7 @@ export default (app: Application) => {
       const instance = new Router({ prefix: baseUrl });
 
       routes.forEach((config: Config) => {
-        const { method = "", route = "", handlers = [] } = config;
+        const { method = "", route = "", handlers = [] }: Config = config;
         const lastHandler = handlers.pop();
 
         if (lastHandler === undefined) {
