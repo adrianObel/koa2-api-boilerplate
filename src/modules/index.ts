@@ -26,9 +26,9 @@ export default (app: Application) => {
       routes.forEach((config: Config) => {
         const { method = "", route = "", handlers = [] } = config;
         const lastHandler = handlers.pop();
-        
+
         if (lastHandler === undefined) {
-          throw new Error ("Needs handler")
+          throw new Error ("Route always needs a handler")
         }
 
         instance[method.toLowerCase() as keyof Router](route, ...handlers, async function (ctx: BaseContext) {
