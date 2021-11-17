@@ -1,5 +1,5 @@
 import glob from "glob";
-import Router from "koa-router";
+import Router from 'koa-router'
 import Application, {BaseContext, Next} from "koa";
 
 
@@ -25,10 +25,13 @@ export default (app: Application) => {
 
       routes.forEach((config: Config) => {
         const { method = "", route = "", handlers = [] } = config;
-
         const lastHandler = handlers.pop();
+        
+        if (lastHandler === undefined) {
+          throw new Error ("Needs handler")
+        }
 
-        instance[method.toLowerCase()](route, ...handlers, async function (ctx: BaseContext) {
+        instance[method.toLowerCase() as keyof Router](route, ...handlers, async function (ctx: BaseContext) {
             return await lastHandler(ctx);
           }
         );
