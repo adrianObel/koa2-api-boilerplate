@@ -1,0 +1,43 @@
+import glob from "glob";
+import Router from 'koa-router'
+import Application, {BaseContext, Next} from "koa";
+
+
+export interface Config {
+  method: string
+  route: string
+  handlers: Array<(ctx: BaseContext, next?: Next) => Promise<void>>
+}
+
+
+export default (app: Application) => {
+  glob(`${__dirname}/*`, { ignore: "**/index.js" }, (err: any, matches: Array<string>) => {
+    if (err) {
+      throw err;
+    }
+
+    matches.forEach((mod: string) => {
+      const router = require(`${mod}/router`);
+
+      const routes = router.default;
+      const baseUrl = router.baseUrl;
+      const instance = new Router({ prefix: baseUrl });
+
+      routes.forEach((config: Config) => {
+        const { method = "", route = "", handlers = [] }: Config = config;
+        const lastHandler = handlers.pop();
+
+        if (lastHandler === undefined) {
+          throw new Error ("Route always needs a handler")
+        }
+
+        instance[method.toLowerCase() as keyof Router](route, ...handlers, async function (ctx: BaseContext) {
+            return await lastHandler(ctx);
+          }
+        );
+
+        app.use(instance.routes()).use(instance.allowedMethods());
+      });
+    });
+  });
+};
